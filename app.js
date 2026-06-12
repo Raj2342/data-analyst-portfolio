@@ -384,6 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ecommerce: {
             badge: "E-COMMERCE ANALYTICS",
             title: "Promotional Waste Audit: Cart Abandonment & Margin Optimization",
+            imageSrc: "assets/cart-dashboard-inside.png",
             tags: ["SQL", "Python", "Tableau", "Business Intelligence"],
             context: "A US e-commerce startup generating $10M annually faced a 70% cart abandonment rate, leaving $7M at risk. The core issue was a 'dumb discount system' that automatically sent a 10% discount to every abandoned cart. This created a massive two-fold financial bleed:",
             achievements: [
@@ -392,16 +393,18 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             pipelineTabName: "Business Questions",
             questions: [
-                { title: "The Baseline", detail: "What is the Total Revenue at Risk? (Calculated by filtering 'cart' events without a purchase to size the problem)." },
-                { title: "The Margin Bleed", detail: "How do we identify 'Safe Buyers'? (Isolated users with low category focus and high session velocity to block unnecessary discount triggers)." },
-                { title: "The Rescue Target", detail: "Who actually needs a discount? (Engineered a 'Browse-to-Cart Ratio' to identify 'Hesitant Buyers' who require a 10% nudge to convert)." },
-                { title: "The Noise", detail: "Who is draining the ad budget? (Flagged 'Window Shoppers' with 40+ items to exclude them from paid retargeting campaigns)." }
+                { title: "The Baseline", detail: "How much money is actually sitting in abandoned carts?" },
+                { title: "The Margin Bleed", detail: "Who are the 'Safe Buyers' we are accidentally giving discounts to?" },
+                { title: "The Rescue Target", detail: "Who are the 'Hesitant Buyers' that actually need the 10% pop-up to convert?" },
+                { title: "The Noise", detail: "Who are the 'Window Shoppers' we should ignore completely?" }
             ],
+            metricsHeading: "Executive Financial Breakdown",
+            metricsDescription: "Top-level financial metrics highlighting total margin erosion, actual baseline revenue, and the total recoverable capital after optimizing the discount strategy.",
             metrics: [
-                { value: "$7.0M", label: "Revenue at Risk" },
-                { value: "70%", label: "Abandonment Rate" },
-                { value: "30%", label: "Retargeting Saved" },
-                { value: "$3.2M", label: "Rescued Revenue" }
+                { value: "$3.89bn", label: "Potential Revenue" },
+                { value: "$1.73bn", label: "Actual Revenue" },
+                { value: "$2.17bn", label: "Revenue Bleed" },
+                { value: "$1.33bn", label: "Recoverable Revenue" }
             ],
             chartConfig: {
                 type: 'bar',
@@ -701,7 +704,18 @@ def process_social_stream(posts):
         }
 
         // Metrics Tab & General layout
-        modalDescMetrics.textContent = "Detailed validation outputs derived from test splits, real-time feedback datasets, and system run logs.";
+        const tabMetricsHeading = document.querySelector('#tab-metrics h3');
+        if (data.metricsHeading) {
+            tabMetricsHeading.textContent = data.metricsHeading;
+        } else {
+            tabMetricsHeading.textContent = "Analytical Impact & Validation";
+        }
+
+        if (data.metricsDescription) {
+            modalDescMetrics.textContent = data.metricsDescription;
+        } else {
+            modalDescMetrics.textContent = "Detailed validation outputs derived from test splits, real-time feedback datasets, and system run logs.";
+        }
         modalMetricsContainer.innerHTML = '';
         data.metrics.forEach(m => {
             const box = document.createElement('div');
@@ -713,14 +727,23 @@ def process_social_stream(posts):
             modalMetricsContainer.appendChild(box);
         });
 
-        // Destroy previous chart if it exists
+        // Handle dynamic visual panels (image or canvas chart)
+        const chartWrapper = document.querySelector('.modal-chart-wrapper');
         if (modalChartInstance) {
             modalChartInstance.destroy();
+            modalChartInstance = null;
         }
 
-        // Initialize new Chart inside Modal
-        const modalChartCtx = document.getElementById('modalInteractiveChart').getContext('2d');
-        modalChartInstance = new Chart(modalChartCtx, data.chartConfig);
+        const visualCaption = document.querySelector('.modal-visual-caption');
+        if (data.imageSrc) {
+            chartWrapper.innerHTML = `<img src="${data.imageSrc}" alt="Dashboard Inside" class="contained-dashboard-img">`;
+            visualCaption.innerHTML = `<a href="https://app.powerbi.com/view?r=eyJrIjoiOWE2ODY3Y2ItNGM1Yi00ZDhhLTk4ZGUtNDQ3YTI0ZTc2ZTYyIiwidCI6IjM0YmQ4YmVkLTJhYzEtNDFhZS05ZjA4LTRlMGEzZjExNzA2YyJ9" target="_blank" rel="noopener noreferrer" class="live-dashboard-btn"><span class="pulse-dot"></span> Live Power BI Dashboard</a>`;
+        } else {
+            chartWrapper.innerHTML = `<canvas id="modalInteractiveChart"></canvas>`;
+            const modalChartCtx = document.getElementById('modalInteractiveChart').getContext('2d');
+            modalChartInstance = new Chart(modalChartCtx, data.chartConfig);
+            visualCaption.innerHTML = `<i class="fa-solid fa-chart-line-up"></i> Live Interactive Visualization`;
+        }
 
         // Reset Tabs to active overview
         const tabBtns = document.querySelectorAll('.modal-tab-btn');

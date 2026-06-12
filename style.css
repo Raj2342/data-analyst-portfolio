@@ -1474,6 +1474,61 @@ a:hover {
     justify-content: center;
 }
 
+.contained-dashboard-img {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+}
+
+.live-dashboard-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background: var(--accent-teal-light);
+    border: 1px solid rgba(79, 209, 197, 0.25);
+    color: var(--accent-teal);
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.live-dashboard-btn:hover {
+    background: rgba(79, 209, 197, 0.26);
+    box-shadow: 0 0 12px rgba(79, 209, 197, 0.3);
+}
+
+.pulse-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent-teal);
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse-blink 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-blink {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(1.15);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .modal-visual-caption {
     margin-top: 24px;
     font-size: 0.78rem;
