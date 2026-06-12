@@ -381,56 +381,47 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Project Detailed Data Store
     const projectData = {
-        churn: {
-            badge: "Predictive Modeling",
-            title: "Predictive Customer Churn Engine",
-            tags: ["Python", "Scikit-Learn", "SQL", "Tableau", "XGBoost"],
-            context: "A high-growth subscription SaaS company faced escalating customer churn, impacting net revenue retention (NRR). This project developed an end-to-end classification pipeline that flags clients matching early decay indicators 60 days before contract expiry.",
+        ecommerce: {
+            badge: "E-COMMERCE ANALYTICS",
+            title: "Promotional Waste Audit: Cart Abandonment & Margin Optimization",
+            tags: ["SQL", "Python", "Tableau", "Business Intelligence"],
+            context: "A US e-commerce startup generating $10M annually faced a 70% cart abandonment rate, leaving $7M at risk. The core issue was a 'dumb discount system' that automatically sent a 10% discount to every abandoned cart. This created a massive two-fold financial bleed:",
             achievements: [
-                "Constructed 45+ feature models capturing customer platform telemetry, billing flags, and CRM interaction history.",
-                "Engineered daily ETL ingestion scraping data from Snowflake and Snowflake schemas.",
-                "Deployed calibrated XGBoost Classifier scoring an AUC-ROC of 0.92, outperforming baseline models by 14%.",
-                "Delivered direct risk metrics to Salesforce, equipping sales managers to retrieve retention strategies and cut churn by 24%."
+                "Margin Erosion: The system inadvertently rewarded 'Safe Buyers' (high-intent, high-velocity users) with discounts they didn't need, setting profit margins on fire.",
+                "Wasted Ad Spend: The marketing team burned retargeting budgets on 'Window Shoppers' (users with stagnant profiles and absurdly high cart values) who had zero purchasing intent."
             ],
-            pipeline: "Telemetry and customer activity logs are ingested from Snowflake datasets. Data undergoes pre-processing, rolling feature window engineering, and standard scaling. The classification module executes daily, outputs scores to a PostgreSQL table, and publishes to Tableau dashboard feeds.",
-            code: `import pandas as pd
-from xgboost import XGBClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import roc_auc_score
-
-# Ingest and feature engineer
-telemetry = pd.read_csv("user_telemetry.csv")
-telemetry['usage_drop_ratio'] = telemetry['usage_30d'] / (telemetry['usage_90d'] + 1e-6)
-
-# Build feature matrix
-features = ['usage_drop_ratio', 'ticket_count_30d', 'contract_duration', 'payment_delays']
-X = telemetry[features]
-y = telemetry['has_churned']
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
-
-# Instantiate and fit XGBoost classifier
-xgb = XGBClassifier(max_depth=5, learning_rate=0.04, n_estimators=600, eval_metric='logloss')
-xgb.fit(X_train, y_train)
-
-# Output evaluation metrics
-predictions = xgb.predict_proba(X_test)[:, 1]
-print("Validation AUC ROC:", roc_auc_score(y_test, predictions))`,
+            pipelineTabName: "Business Questions",
+            questions: [
+                { title: "The Baseline", detail: "What is the Total Revenue at Risk? (Calculated by filtering 'cart' events without a purchase to size the problem)." },
+                { title: "The Margin Bleed", detail: "How do we identify 'Safe Buyers'? (Isolated users with low category focus and high session velocity to block unnecessary discount triggers)." },
+                { title: "The Rescue Target", detail: "Who actually needs a discount? (Engineered a 'Browse-to-Cart Ratio' to identify 'Hesitant Buyers' who require a 10% nudge to convert)." },
+                { title: "The Noise", detail: "Who is draining the ad budget? (Flagged 'Window Shoppers' with 40+ items to exclude them from paid retargeting campaigns)." }
+            ],
             metrics: [
-                { value: "0.92", label: "Model AUC-ROC" },
-                { value: "24%", label: "Churn Reduction" },
-                { value: "$1.2M", label: "ARR Preserved" },
-                { value: "88%", label: "Model Precision" }
+                { value: "$7.0M", label: "Revenue at Risk" },
+                { value: "70%", label: "Abandonment Rate" },
+                { value: "30%", label: "Retargeting Saved" },
+                { value: "$3.2M", label: "Rescued Revenue" }
             ],
             chartConfig: {
                 type: 'bar',
                 data: {
-                    labels: ['Usage Drop %', 'Billing Delay', 'Ticket Count', 'Contract Age', 'Feature Coverage'],
+                    labels: ['Revenue at Risk', 'Margin Saved', 'Rescued Revenue', 'Ad Burn Stopped'],
                     datasets: [{
-                        label: 'Feature Importance Score',
-                        data: [0.38, 0.25, 0.18, 0.12, 0.07],
-                        backgroundColor: 'rgba(49, 130, 206, 0.7)',
-                        borderColor: '#3182CE',
+                        label: 'Financial Impact ($ Millions)',
+                        data: [7.0, 1.8, 3.2, 1.1],
+                        backgroundColor: [
+                            'rgba(245, 101, 101, 0.7)',
+                            'rgba(79, 209, 197, 0.7)',
+                            'rgba(66, 153, 225, 0.7)',
+                            'rgba(79, 209, 197, 0.7)'
+                        ],
+                        borderColor: [
+                            '#F56565',
+                            '#38B2AC',
+                            '#3182CE',
+                            '#38B2AC'
+                        ],
                         borderWidth: 1.5
                     }]
                 },
@@ -438,11 +429,14 @@ print("Validation AUC ROC:", roc_auc_score(y_test, predictions))`,
                     responsive: true,
                     maintainAspectRatio: false,
                     indexAxis: 'y',
-                    plugins: { legend: { display: false } },
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: function(context) { return '$' + context.raw + 'M'; } } }
+                    },
                     scales: {
                         x: { 
                             grid: { color: 'rgba(255, 255, 255, 0.05)' }, 
-                            title: { display: true, text: 'Gini Importance Ratio', font: { size: 9 }, color: '#A0AEC0' },
+                            title: { display: true, text: 'USD Millions', font: { size: 9 }, color: '#A0AEC0' },
                             ticks: { color: '#A0AEC0', font: { size: 9 } }
                         },
                         y: { 
@@ -671,9 +665,40 @@ def process_social_stream(posts):
             modalDescAchievements.appendChild(li);
         });
 
-        // Pipeline tab
-        modalDescPipeline.textContent = data.pipeline;
-        modalCodeSnippet.textContent = data.code;
+        // Dynamic Pipeline / Business Questions Tab Title & Content
+        const pipelineTabBtn = document.getElementById('modal-tab-pipeline-btn');
+        const pipelineHeading = document.getElementById('modal-pipeline-heading');
+        const codeWrapper = document.getElementById('modal-code-wrapper');
+
+        if (data.pipelineTabName) {
+            pipelineTabBtn.textContent = data.pipelineTabName;
+        } else {
+            pipelineTabBtn.textContent = "Data Pipeline";
+        }
+
+        if (data.questions) {
+            // Populate Business Questions diagnostic framework
+            pipelineHeading.textContent = "Diagnostic Framework & Business Questions";
+            
+            let htmlContent = `<div class="business-questions-list" style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;">`;
+            data.questions.forEach(q => {
+                htmlContent += `
+                    <div class="question-item" style="border-left: 3px solid var(--accent-blue); padding-left: 14px;">
+                        <h4 style="font-size: 0.95rem; color: var(--text-primary); font-weight: 700; margin-bottom: 4px;">${q.title}</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">${q.detail}</p>
+                    </div>
+                `;
+            });
+            htmlContent += `</div>`;
+            modalDescPipeline.innerHTML = htmlContent;
+            codeWrapper.style.display = 'none';
+        } else {
+            // Standard Pipeline Tab Content
+            pipelineHeading.textContent = "Data Pipeline & Architecture";
+            modalDescPipeline.textContent = data.pipeline;
+            codeWrapper.style.display = 'block';
+            modalCodeSnippet.textContent = data.code;
+        }
 
         // Metrics Tab & General layout
         modalDescMetrics.textContent = "Detailed validation outputs derived from test splits, real-time feedback datasets, and system run logs.";

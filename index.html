@@ -218,25 +218,25 @@
 
                 <div class="projects-grid">
                     <!-- Project Card 1 -->
-                    <article class="project-card glass-card" data-tilt data-tilt-max="10" data-project-id="churn">
+                    <article class="project-card glass-card" data-tilt data-tilt-max="10" data-project-id="ecommerce">
                         <div class="project-img-wrapper">
-                            <img src="assets/churn_prediction_thumbnail.png" alt="Customer Churn Prediction Dashboard" class="project-img">
+                            <img src="assets/cart-dashboard.png" alt="Promotional Waste Audit Dashboard" class="project-img">
                             <div class="project-overlay">
                                 <span class="btn btn-secondary">Explore Study <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
                             </div>
                         </div>
                         <div class="project-info">
                             <div class="project-meta">
-                                <span class="project-tag-badge">Predictive Modeling</span>
-                                <span class="project-metric-highlight code-font"><i class="fa-solid fa-arrow-down"></i> 24% Churn</span>
+                                <span class="project-tag-badge">E-COMMERCE ANALYTICS</span>
+                                <span class="project-metric-highlight code-font"><i class="fa-solid fa-percent"></i> Rescued Profit Margins</span>
                             </div>
-                            <h3>Predictive Customer Churn Engine</h3>
-                            <p>Developed a machine learning workflow using XGBoost to identify churn hazards early, saving $1.2M in annual recurring revenue.</p>
+                            <h3>Promotional Waste Audit: Cart Abandonment & Margin Optimization</h3>
+                            <p>Diagnosed a $7M revenue bleed caused by an automated blanket discount strategy. Developed an intent-based classification system to halt margin erosion from 'Safe Buyers' and eliminate wasted ad spend on 'Window Shoppers'.</p>
                             <div class="project-tech-badges">
-                                <span><i class="fa-brands fa-python"></i> Python</span>
-                                <span><i class="fa-solid fa-network-wired"></i> Scikit-Learn</span>
                                 <span><i class="fa-solid fa-database"></i> SQL</span>
-                                <span><i class="fa-solid fa-chart-line"></i> Tableau</span>
+                                <span><i class="fa-brands fa-python"></i> Python</span>
+                                <span><i class="fa-solid fa-chart-simple"></i> Tableau</span>
+                                <span><i class="fa-solid fa-chart-line"></i> Business Intelligence</span>
                             </div>
                             <button class="btn btn-text open-modal-btn">View Full Case Study <i class="fa-solid fa-arrow-right"></i></button>
                         </div>
@@ -398,7 +398,7 @@
                         <!-- Navigation Tabs inside Modal -->
                         <div class="modal-tabs">
                             <button class="modal-tab-btn active" data-tab="tab-overview">Overview</button>
-                            <button class="modal-tab-btn" data-tab="tab-pipeline">Data Pipeline</button>
+                            <button class="modal-tab-btn" data-tab="tab-pipeline" id="modal-tab-pipeline-btn">Data Pipeline</button>
                             <button class="modal-tab-btn" data-tab="tab-metrics">Analytical Deep Dive</button>
                         </div>
 
@@ -414,9 +414,9 @@
 
                         <!-- Tab: Pipeline -->
                         <div class="modal-tab-content" id="tab-pipeline">
-                            <h3>Data Pipeline & Architecture</h3>
+                            <h3 id="modal-pipeline-heading">Data Pipeline & Architecture</h3>
                             <p id="modal-desc-pipeline">Pipeline paragraph.</p>
-                            <div class="code-block-wrapper">
+                            <div class="code-block-wrapper" id="modal-code-wrapper">
                                 <div class="code-block-header">
                                     <span>pipeline.py</span>
                                     <button class="copy-code-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i></button>
