@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Rivera | Portfolio | Data Analyst & Strategist</title>
+    <!-- Google Fonts: Inter & Roboto Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Canvas Background for Fluid Data Particle Network -->
+    <canvas id="canvas-bg"></canvas>
+
+    <!-- Custom Cursor Glow -->
+    <div id="cursor-glow"></div>
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon"><i class="fa-solid fa-chart-line"></i></span>
+                <span class="logo-text">Alex<span class="accent-dot">.</span>Rivera</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#hero" class="active">Home</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <a href="#contact" class="btn btn-primary nav-cta">Let's Connect</a>
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay">
+        <div class="mobile-nav-menu">
+            <a href="#hero" class="mobile-link">Home</a>
+            <a href="#skills" class="mobile-link">Skills</a>
+            <a href="#projects" class="mobile-link">Projects</a>
+            <a href="#contact" class="mobile-link">Contact</a>
+            <a href="#contact" class="btn btn-primary">Let's Connect</a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="pulse-indicator"></span>
+                        Available for Full-time Roles & Contracts
+                    </div>
+                    <h1>Transforming Complex Data into <span class="text-gradient">Clear Strategy</span>.</h1>
+                    <p class="hero-subtitle">
+                        I am a Data Analyst specializing in building interactive pipelines, translating messy datasets into actionable intelligence, and designing predictive models that drive measurable growth.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary hero-btn">
+                            View Projects <i class="fa-solid fa-arrow-down-long"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary hero-btn">
+                            Get in Touch <i class="fa-solid fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Metrics Dashboard (Visual anchor instead of flat avatar) -->
+                <div class="hero-visual" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
+                    <div class="glass-dashboard">
+                        <div class="dashboard-header">
+                            <span class="dots"></span>
+                            <span class="dashboard-title">Live Performance Metrics</span>
+                            <i class="fa-solid fa-arrows-spin spinning-icon"></i>
+                        </div>
+                        <div class="dashboard-body">
+                            <!-- Visual Chart Canvas -->
+                            <div class="hero-chart-container">
+                                <canvas id="heroMiniChart"></canvas>
+                            </div>
+                            <div class="dashboard-grid">
+                                <div class="metric-card">
+                                    <span class="metric-label">Data Points Cleaned</span>
+                                    <span class="metric-value code-font">14.2M+</span>
+                                    <span class="metric-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +12% MoM</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="metric-label">Forecast Accuracy</span>
+                                    <span class="metric-value code-font">98.4%</span>
+                                    <span class="metric-trend up"><i class="fa-solid fa-check-double"></i> High Confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Floating Quick Stats -->
+            <div class="container quick-stats-container">
+                <div class="quick-stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fa-solid fa-database"></i></div>
+                        <div class="stat-text">
+                            <h3 class="code-font">500+ GB</h3>
+                            <p>Data Handled</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <div class="stat-text">
+                            <h3 class="code-font">15+</h3>
+                            <p>Production Pipelines</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fa-solid fa-business-time"></i></div>
+                        <div class="stat-text">
+                            <h3 class="code-font">35%</h3>
+                            <p>Efficiency Improvement</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills & Tools Section -->
+        <section id="skills" class="skills-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Analytical Core</span>
+                    <h2>Skills & Toolkit</h2>
+                    <p>Leveraging modern languages, frameworks, and visualization tools to turn raw signals into execution blueprints.</p>
+                </div>
+
+                <div class="skills-grid">
+                    <!-- Left Side: Interactive Radar Chart representing skill categories -->
+                    <div class="skills-visualization glass-card" data-tilt data-tilt-max="5">
+                        <div class="card-glow"></div>
+                        <h3>Domain Competency Matrix</h3>
+                        <p class="subtitle">Interactive mapping of toolsets & methodologies</p>
+                        <div class="radar-container">
+                            <canvas id="skillsRadarChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Detailed Tech Stack Cards -->
+                    <div class="skills-list">
+                        <!-- Card 1: Programming & Querying -->
+                        <div class="skill-category-card glass-card" data-tilt data-tilt-max="6">
+                            <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
+                            <h4>Languages & Querying</h4>
+                            <ul class="skill-tags">
+                                <li>Python</li>
+                                <li>SQL (PostgreSQL, BigQuery)</li>
+                                <li>R Programming</li>
+                                <li>Bash Shelling</li>
+                            </ul>
+                            <div class="skill-progress-bar">
+                                <div class="skill-progress" style="width: 95%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Analysis & Libraries -->
+                        <div class="skill-category-card glass-card" data-tilt data-tilt-max="6">
+                            <div class="skill-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                            <h4>Data Engineering & Modeling</h4>
+                            <ul class="skill-tags">
+                                <li>Pandas & NumPy</li>
+                                <li>Scikit-Learn</li>
+                                <li>Spark / PySpark</li>
+                                <li>dbt (Data Build Tool)</li>
+                                <li>Airflow</li>
+                            </ul>
+                            <div class="skill-progress-bar">
+                                <div class="skill-progress" style="width: 88%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Business Intelligence -->
+                        <div class="skill-category-card glass-card" data-tilt data-tilt-max="6">
+                            <div class="skill-icon"><i class="fa-solid fa-chart-column"></i></div>
+                            <h4>Visualization & Reporting</h4>
+                            <ul class="skill-tags">
+                                <li>Tableau Desktop</li>
+                                <li>Power BI</li>
+                                <li>Seaborn / Matplotlib</li>
+                                <li>Looker Studio</li>
+                            </ul>
+                            <div class="skill-progress-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Case Studies</span>
+                    <h2>Featured Data Projects</h2>
+                    <p>A handpicked selection of analyses, machine learning pipelines, and dashboard deployments mapping out high-impact resolutions.</p>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project Card 1 -->
+                    <article class="project-card glass-card" data-tilt data-tilt-max="10" data-project-id="churn">
+                        <div class="project-img-wrapper">
+                            <img src="assets/churn_prediction_thumbnail.png" alt="Customer Churn Prediction Dashboard" class="project-img">
+                            <div class="project-overlay">
+                                <span class="btn btn-secondary">Explore Study <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-meta">
+                                <span class="project-tag-badge">Predictive Modeling</span>
+                                <span class="project-metric-highlight code-font"><i class="fa-solid fa-arrow-down"></i> 24% Churn</span>
+                            </div>
+                            <h3>Predictive Customer Churn Engine</h3>
+                            <p>Developed a machine learning workflow using XGBoost to identify churn hazards early, saving $1.2M in annual recurring revenue.</p>
+                            <div class="project-tech-badges">
+                                <span><i class="fa-brands fa-python"></i> Python</span>
+                                <span><i class="fa-solid fa-network-wired"></i> Scikit-Learn</span>
+                                <span><i class="fa-solid fa-database"></i> SQL</span>
+                                <span><i class="fa-solid fa-chart-line"></i> Tableau</span>
+                            </div>
+                            <button class="btn btn-text open-modal-btn">View Full Case Study <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 2 -->
+                    <article class="project-card glass-card" data-tilt data-tilt-max="10" data-project-id="supply-chain">
+                        <div class="project-img-wrapper">
+                            <img src="assets/supply-chain_thumbnail.png" alt="Logistics Bottleneck Analysis Dashboard" class="project-img">
+                            <div class="project-overlay">
+                                <span class="btn btn-secondary">Explore Study <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-meta">
+                                <span class="project-tag-badge">Business Intelligence</span>
+                                <span class="project-metric-highlight code-font"><i class="fa-solid fa-clock"></i> -18h Delay</span>
+                            </div>
+                            <h3>Logistics & Supply Chain Flow Dashboard</h3>
+                            <p>Designed a live PostgreSQL-connected pipeline and Tableau dashboard identifying regional transit bottlenecks and reducing delays by 15%.</p>
+                            <div class="project-tech-badges">
+                                <span><i class="fa-solid fa-database"></i> PostgreSQL</span>
+                                <span><i class="fa-solid fa-chart-simple"></i> Tableau</span>
+                                <span><i class="fa-solid fa-terminal"></i> dbt</span>
+                                <span><i class="fa-solid fa-cubes"></i> ETL</span>
+                            </div>
+                            <button class="btn btn-text open-modal-btn">View Full Case Study <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 3 -->
+                    <article class="project-card glass-card" data-tilt data-tilt-max="10" data-project-id="sentiment">
+                        <div class="project-img-wrapper">
+                            <img src="assets/sentiment_analysis_thumbnail.png" alt="Financial Sentiment Analyzer Visualization" class="project-img">
+                            <div class="project-overlay">
+                                <span class="btn btn-secondary">Explore Study <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-meta">
+                                <span class="project-tag-badge">Natural Language Processing</span>
+                                <span class="project-metric-highlight code-font"><i class="fa-solid fa-bullseye"></i> 91% Accuracy</span>
+                            </div>
+                            <h3>Real-time Market Sentiment Monitor</h3>
+                            <p>Deployed an ETL scraper extracting social signals (Reddit & Twitter APIs) to run sentiment analytics, correlating opinions with asset movements.</p>
+                            <div class="project-tech-badges">
+                                <span><i class="fa-brands fa-python"></i> NLTK</span>
+                                <span><i class="fa-solid fa-wind"></i> Apache Airflow</span>
+                                <span><i class="fa-solid fa-cloud"></i> Google BigQuery</span>
+                                <span><i class="fa-solid fa-chart-area"></i> Chart.js</span>
+                            </div>
+                            <button class="btn btn-text open-modal-btn">View Full Case Study <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-wrapper glass-card" data-tilt data-tilt-max="3">
+                    <div class="card-glow"></div>
+                    <div class="contact-info-panel">
+                        <span class="section-tag">Inquiries</span>
+                        <h2>Let's discuss your data challenge.</h2>
+                        <p>I am interested in connecting regarding full-time roles, freelance projects, or just discussing analytical architecture. Fill in the form or reach out via direct paths.</p>
+                        
+                        <div class="contact-methods">
+                            <a href="mailto:alex.rivera.data@example.com" class="contact-method-item">
+                                <span class="method-icon"><i class="fa-solid fa-envelope-open-text"></i></span>
+                                <span class="method-details">
+                                    <span class="method-label">Direct Email</span>
+                                    <span class="method-value">alex.rivera@example.com</span>
+                                </span>
+                            </a>
+                            <div class="contact-method-item">
+                                <span class="method-icon"><i class="fa-solid fa-location-dot"></i></span>
+                                <span class="method-details">
+                                    <span class="method-label">Location</span>
+                                    <span class="method-value">San Francisco, CA (Hybrid / Remote)</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="https://github.com" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" target="_blank" aria-label="Medium blog"><i class="fa-brands fa-medium"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-panel">
+                        <form id="portfolio-contact-form" novalidate>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="form-name">Your Name</label>
+                                    <input type="text" id="form-name" required placeholder="Jane Doe">
+                                    <span class="error-msg">Name is required</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-email">Email Address</label>
+                                    <input type="email" id="form-email" required placeholder="jane@company.com">
+                                    <span class="error-msg">Enter a valid email address</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-subject">Topic / Goal</label>
+                                <input type="text" id="form-subject" placeholder="Predictive Modeling Project / Freelance Contract / Hiring Inquiry">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-message">Detailed Message</label>
+                                <textarea id="form-message" rows="5" required placeholder="Describe your data source, target metrics, or timeline..."></textarea>
+                                <span class="error-msg">Please enter your message</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary form-submit-btn">
+                                <span>Send Message</span> <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+                        <div class="form-success-message">
+                            <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+                            <h3>Message Sent Successfully!</h3>
+                            <p>Thank you for reaching out. Alex will get back to you within 24 hours.</p>
+                            <button class="btn btn-secondary reset-form-btn">Send Another Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <p>&copy; 2026 Alex Rivera. Built with precision, light mode styling, and dynamic charts.</p>
+            <div class="footer-bottom-links">
+                <a href="#hero">Back to Top <i class="fa-solid fa-arrow-up"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Case Study Modal -->
+    <div id="case-study-modal" class="modal-overlay">
+        <div class="modal-container glass-card">
+            <button class="close-modal-btn" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-body">
+                <div class="modal-header">
+                    <span class="project-tag-badge" id="modal-project-badge">Category</span>
+                    <h2 id="modal-project-title">Project Title</h2>
+                    <div class="project-tech-badges" id="modal-project-tags">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                
+                <div class="modal-content-grid">
+                    <!-- Left column: Details and structured tabs -->
+                    <div class="modal-text-content">
+                        <!-- Navigation Tabs inside Modal -->
+                        <div class="modal-tabs">
+                            <button class="modal-tab-btn active" data-tab="tab-overview">Overview</button>
+                            <button class="modal-tab-btn" data-tab="tab-pipeline">Data Pipeline</button>
+                            <button class="modal-tab-btn" data-tab="tab-metrics">Analytical Deep Dive</button>
+                        </div>
+
+                        <!-- Tab: Overview -->
+                        <div class="modal-tab-content active" id="tab-overview">
+                            <h3>Context & Problem Statement</h3>
+                            <p id="modal-desc-context">Context paragraph.</p>
+                            <h3>Key Achievements</h3>
+                            <ul class="modal-achievements-list" id="modal-desc-achievements">
+                                <!-- Populated by JS -->
+                            </ul>
+                        </div>
+
+                        <!-- Tab: Pipeline -->
+                        <div class="modal-tab-content" id="tab-pipeline">
+                            <h3>Data Pipeline & Architecture</h3>
+                            <p id="modal-desc-pipeline">Pipeline paragraph.</p>
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span>pipeline.py</span>
+                                    <button class="copy-code-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i></button>
+                                </div>
+                                <pre><code class="code-font" id="modal-code-snippet"># Code block here</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Tab: Metrics -->
+                        <div class="modal-tab-content" id="tab-metrics">
+                            <h3>Analytical Impact & Validation</h3>
+                            <p id="modal-desc-metrics">Validation paragraph.</p>
+                            <div class="modal-metrics-container">
+                                <!-- Dynamic metrics boxes -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right column: Interactive Visual Graphic (Chart.js / SVG) -->
+                    <div class="modal-visual-panel">
+                        <div class="modal-chart-wrapper">
+                            <canvas id="modalInteractiveChart"></canvas>
+                        </div>
+                        <div class="modal-visual-caption">
+                            <i class="fa-solid fa-chart-line-up"></i> Live Interactive Visualization
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js and VanillaTilt.js Libraries (via CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <!-- Custom Application Code -->
+    <script src="app.js"></script>
+</body>
+</html>
