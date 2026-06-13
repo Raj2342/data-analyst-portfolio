@@ -385,6 +385,8 @@ document.addEventListener('DOMContentLoaded', () => {
             badge: "E-COMMERCE ANALYTICS",
             title: "Promotional Waste Audit: Cart Abandonment & Margin Optimization",
             imageSrc: "assets/cart-dashboard-inside.png",
+            dashboardUrl: "https://app.powerbi.com/view?r=eyJrIjoiOWE2ODY3Y2ItNGM1Yi00ZDhhLTk4ZGUtNDQ3YTI0ZTc2ZTYyIiwidCI6IjM0YmQ4YmVkLTJhYzEtNDFhZS05ZjA4LTRlMGEzZjExNzA2YyJ9",
+            dashboardBtnText: "Live Power BI Dashboard",
             tags: ["SQL", "Python", "Tableau", "Business Intelligence"],
             context: "A US e-commerce startup generating $10M annually faced a 70% cart abandonment rate, leaving $7M at risk. The core issue was a 'dumb discount system' that automatically sent a 10% discount to every abandoned cart. This created a massive two-fold financial bleed:",
             achievements: [
@@ -450,64 +452,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         },
-        'supply-chain': {
-            badge: "Business Intelligence",
-            title: "Logistics & Supply Chain Flow Optimization",
-            tags: ["PostgreSQL", "Tableau", "dbt", "Airflow", "ETL"],
-            context: "A multi-regional supply chain suffered from severe delivery delays due to warehouse transit bottlenecks. The goal was to trace logistical checkpoints, isolate high-frequency delay links, and construct a dashboard to re-route cargo dynamically.",
+        'audio-streaming': {
+            badge: "B2C SaaS / AUDIO STREAMING",
+            title: "LTV-Based Acquisition Strategy: Optimizing Marketing Spend",
+            dashboardUrl: "https://app.powerbi.com/view?r=eyJrIjoiZDY3ODEzYTctOGY3MS00MDQ0LWEwZWMtZDcxYTM2MjJmY2Y0IiwidCI6IjM0YmQ4YmVkLTJhYzEtNDFhZS05ZjA4LTRlMGEzZjExNzA2YyJ9",
+            dashboardBtnText: "Live Interactive Visualization",
+            tags: ["SQL", "Power BI", "Python", "Cohort Analysis"],
+            context: "For a subscription audio streaming app, not all acquired customers are created equal. The business was burning cash by spending acquisition budgets on low-value users who churned after a single month of service. The objective was to join member profiles and transaction logs to identify which registration channels produced 'Power Users' (12+ months retention) and shift the marketing budget accordingly.<br><br><strong>The Core Metric:</strong><div class=\"formula-block\" style=\"display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: rgba(79, 209, 197, 0.05); border: 1px solid rgba(79, 209, 197, 0.15); padding: 16px; border-radius: 8px; margin: 16px 0; font-family: 'Roboto Mono', monospace; font-size: 1rem; color: var(--accent-teal); width: 100%;\"><span style=\"font-weight: 700;\">LTV</span><span>=</span><div style=\"display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1; padding: 0 4px;\"><span style=\"border-bottom: 1.5px solid var(--accent-teal); padding-bottom: 2px;\">ARPU</span><span style=\"padding-top: 2px;\">Churn Rate</span></div><span>×</span><span>Gross Margin</span></div>",
             achievements: [
-                "Centralized disparate warehouse shipping schedules from 5 fulfillment vendors into PostgreSQL databases.",
-                "Constructed dbt models creating optimized facts and dimension tables containing clean transit indicators.",
-                "Built an interactive Tableau dashboard showcasing heatmaps of logistical delay clusters and cargo bottlenecks.",
-                "Reduced average shipping transit delays by 18 hours (15% reduction) in target regions."
+                "Identified that low-CAC channels (e.g., social ads) yielded a high volume of 'serial churners' resulting in net profit loss.",
+                "Proved that high-CAC channels (e.g., targeted search) acquired loyal customers with a 5x higher Lifetime Value, justifying a complete reallocation of ad spend."
             ],
-            pipeline: "Raw tracking API signals are pulled and saved to GCS buckets. Airflow triggers python scripts running transformations. DBT processes standard business calculations (Transit Duration, Warehouse Idle Time) and generates dimensional marts.",
-            code: `-- dbt model: shipping_transit_telemetry.sql
-WITH raw_shipments AS (
-    SELECT * FROM {{ source('logistics', 'shipment_records') }}
-),
-calculated_durations AS (
-    SELECT 
-        shipment_id,
-        destination_state,
-        origin_warehouse_id,
-        pickup_timestamp,
-        delivery_timestamp,
-        EXTRACT(EPOCH FROM (delivery_timestamp - pickup_timestamp))/3600 AS transit_duration_hours
-    FROM raw_shipments
-    WHERE delivery_status = 'COMPLETED'
-)
-SELECT 
-    origin_warehouse_id,
-    AVG(transit_duration_hours) AS avg_duration_hours,
-    COUNT(shipment_id) AS total_shipments_processed
-FROM calculated_durations
-GROUP BY origin_warehouse_id`,
+            pipelineTabName: "Business Questions",
+            questions: [
+                { title: "1. The Revenue Contribution Question", detail: '"Which registration channels are actually paying our bills?" (Calculated Average Net Revenue Per User by subtracting list price from actual amount paid to expose heavy discount channels).' },
+                { title: "2. The \"Survival\" Question", detail: '"What is the expected \'Active Life\' of a user from each channel?" (Calculated Mean Tenure in days to map survival curves across 3, 6, and 12 months).' },
+                { title: "3. The \"Discount Trap\" Analysis", detail: '"Are we acquiring \'Serial Churners\' through promos?" (Flagged discounted users to track 30-day churn rates against full-price users).' },
+                { title: "4. The Payment Friction Question", detail: '"Does the acquisition channel dictate the payment method (and thus the churn)?" (Mapped registration source to payment methods to identify the highest LTV \'Golden Path\').' },
+                { title: "5. The CAC Payback \"Proxy\"", detail: '"How many months does it take to \'break even\' on a user from this channel?" (Built a What-If model in Power BI to calculate Months to Payback based on estimated acquisition costs).' }
+            ],
+            metricsHeading: "VIP User Revenue Contribution",
+            metricsDescription: "Performance parameters isolating the financial impact of 'Power Users' versus the total customer base, validating the shift in acquisition strategy.",
             metrics: [
-                { value: "-18h", label: "Avg Delivery Delay" },
-                { value: "15%", label: "Transit Efficiency Gain" },
-                { value: "48k", label: "Shipments Analyzed" },
-                { value: "100%", label: "Real-time Visibility" }
+                { value: "2M", label: "Total Customers" },
+                { value: "$110.1999M", label: "Expected Amount" },
+                { value: "557.97K", label: "Total Vip User" },
+                { value: "$63.79M", label: "Vip User Amount" }
             ],
             chartConfig: {
                 type: 'line',
                 data: {
-                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                    labels: ['Month 1', 'Month 3', 'Month 6', 'Month 9', 'Month 12'],
                     datasets: [
                         {
-                            label: 'Before Optimization',
-                            data: [42, 45, 43, 44, 46, 44],
-                            borderColor: '#E53E3E', // Light red line
+                            label: 'Social Ads (Low LTV)',
+                            data: [100, 45, 25, 12, 5],
+                            borderColor: '#E53E3E',
                             borderWidth: 1.5,
                             borderDash: [4, 4],
                             fill: false,
                             tension: 0.2,
-                            pointRadius: 0
+                            pointRadius: 2
                         },
                         {
-                            label: 'After dbt Optimization',
-                            data: [42, 38, 35, 34, 30, 26],
-                            borderColor: '#38B2AC', // Accent Teal
+                            label: 'Targeted Search (High LTV)',
+                            data: [100, 85, 75, 68, 62],
+                            borderColor: '#38B2AC',
                             backgroundColor: 'rgba(56, 178, 172, 0.1)',
                             borderWidth: 2,
                             fill: true,
@@ -528,7 +518,7 @@ GROUP BY origin_warehouse_id`,
                         },
                         y: { 
                             grid: { color: 'rgba(255, 255, 255, 0.05)' }, 
-                            title: { display: true, text: 'Average Transit Hours', font: { size: 9 }, color: '#A0AEC0' },
+                            title: { display: true, text: 'User Retention Rate (%)', font: { size: 9 }, color: '#A0AEC0' },
                             ticks: { color: '#A0AEC0', font: { size: 9 } }
                         }
                     }
@@ -658,7 +648,7 @@ def process_social_stream(posts):
         });
 
         // Overview / Context
-        modalDescContext.textContent = data.context;
+        modalDescContext.innerHTML = data.context;
 
         // Achievements list
         modalDescAchievements.innerHTML = '';
@@ -737,11 +727,15 @@ def process_social_stream(posts):
         const visualCaption = document.querySelector('.modal-visual-caption');
         if (data.imageSrc) {
             chartWrapper.innerHTML = `<img src="${data.imageSrc}" alt="Dashboard Inside" class="contained-dashboard-img">`;
-            visualCaption.innerHTML = `<a href="https://app.powerbi.com/view?r=eyJrIjoiOWE2ODY3Y2ItNGM1Yi00ZDhhLTk4ZGUtNDQ3YTI0ZTc2ZTYyIiwidCI6IjM0YmQ4YmVkLTJhYzEtNDFhZS05ZjA4LTRlMGEzZjExNzA2YyJ9" target="_blank" rel="noopener noreferrer" class="live-dashboard-btn"><span class="pulse-dot"></span> Live Power BI Dashboard</a>`;
         } else {
             chartWrapper.innerHTML = `<canvas id="modalInteractiveChart"></canvas>`;
             const modalChartCtx = document.getElementById('modalInteractiveChart').getContext('2d');
             modalChartInstance = new Chart(modalChartCtx, data.chartConfig);
+        }
+
+        if (data.dashboardUrl) {
+            visualCaption.innerHTML = `<a href="${data.dashboardUrl}" target="_blank" rel="noopener noreferrer" class="live-dashboard-btn"><span class="pulse-dot"></span> ${data.dashboardBtnText || 'Live Interactive Visualization'}</a>`;
+        } else {
             visualCaption.innerHTML = `<i class="fa-solid fa-chart-line-up"></i> Live Interactive Visualization`;
         }
 
