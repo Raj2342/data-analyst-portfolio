@@ -221,7 +221,7 @@
                     <article class="project-card glass-card" data-tilt data-tilt-max="10" data-project-id="ecommerce">
                         <div class="project-img-wrapper">
                             <img src="assets/cart-dashboard.png" alt="Cart Abandonment Dashboard" class="project-img">
-                            <div class="project-overlay">
+                            <div class="project-overlay" onclick="openModal('modal-1', 'ecommerce')">
                                 <span class="btn btn-secondary">Explore Study <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
                             </div>
                         </div>
@@ -238,7 +238,7 @@
                                 <span><i class="fa-solid fa-chart-simple"></i> Tableau</span>
                                 <span><i class="fa-solid fa-chart-line"></i> Business Intelligence</span>
                             </div>
-                            <button class="btn btn-text open-modal-btn">View Full Case Study <i class="fa-solid fa-arrow-right"></i></button>
+                            <button class="btn btn-text open-modal-btn" onclick="openModal('modal-1', 'ecommerce')">View Full Case Study <i class="fa-solid fa-arrow-right"></i></button>
                         </div>
                     </article>
 
@@ -246,7 +246,7 @@
                     <article class="project-card glass-card" data-tilt data-tilt-max="10" data-project-id="audio-streaming">
                         <div class="project-img-wrapper">
                             <img src="assets/music_dashbord.png" alt="Streaming Analytics Dashboard" class="project-img">
-                            <div class="project-overlay">
+                            <div class="project-overlay" onclick="openModal('modal-2', 'audio-streaming')">
                                 <span class="btn btn-secondary">Explore Study <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
                             </div>
                         </div>
@@ -263,32 +263,32 @@
                                 <span><i class="fa-brands fa-python"></i> Python</span>
                                 <span><i class="fa-solid fa-chart-line"></i> Cohort Analysis</span>
                             </div>
-                            <button class="btn btn-text open-modal-btn">View Full Case Study <i class="fa-solid fa-arrow-right"></i></button>
+                            <button class="btn btn-text open-modal-btn" onclick="openModal('modal-2', 'audio-streaming')">View Full Case Study <i class="fa-solid fa-arrow-right"></i></button>
                         </div>
                     </article>
 
                     <!-- Project Card 3 -->
-                    <article class="project-card glass-card" data-tilt data-tilt-max="10" data-project-id="sentiment">
+                    <article class="project-card glass-card" data-tilt data-tilt-max="10" data-project-id="market-basket">
                         <div class="project-img-wrapper">
-                            <img src="assets/sentiment_analysis_thumbnail.png" alt="Financial Sentiment Analyzer Visualization" class="project-img">
-                            <div class="project-overlay">
+                            <img src="assets/market_basket_analysis.png" alt="Market Basket Dashboard" class="project-img">
+                            <div class="project-overlay" onclick="openModal('modal-3', 'market-basket')">
                                 <span class="btn btn-secondary">Explore Study <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
                             </div>
                         </div>
                         <div class="project-info">
                             <div class="project-meta">
-                                <span class="project-tag-badge">Natural Language Processing</span>
-                                <span class="project-metric-highlight code-font"><i class="fa-solid fa-bullseye"></i> 91% Accuracy</span>
+                                <span class="project-tag-badge">E-COMMERCE / RETAIL ANALYTICS</span>
+                                <span class="project-metric-highlight code-font"><i class="fa-solid fa-arrow-trend-up"></i> ↑ Average Order Value</span>
                             </div>
-                            <h3>Real-time Market Sentiment Monitor</h3>
-                            <p>Deployed an ETL scraper extracting social signals (Reddit & Twitter APIs) to run sentiment analytics, correlating opinions with asset movements.</p>
+                            <h3>Market Basket Analysis: The Cross-Selling Engine</h3>
+                            <p>Designed a cross-sell engine to maximize revenue by identifying organically co-purchased items. Leveraged association rules to drive smart recommendations and increase Average Order Value (AOV) without acquiring new customers.</p>
                             <div class="project-tech-badges">
-                                <span><i class="fa-brands fa-python"></i> NLTK</span>
-                                <span><i class="fa-solid fa-wind"></i> Apache Airflow</span>
-                                <span><i class="fa-solid fa-cloud"></i> Google BigQuery</span>
-                                <span><i class="fa-solid fa-chart-area"></i> Chart.js</span>
+                                <span><i class="fa-solid fa-database"></i> SQL</span>
+                                <span><i class="fa-brands fa-python"></i> Python</span>
+                                <span><i class="fa-solid fa-chart-simple"></i> Tableau</span>
+                                <span><i class="fa-solid fa-gears"></i> Apriori</span>
                             </div>
-                            <button class="btn btn-text open-modal-btn">View Full Case Study <i class="fa-solid fa-arrow-right"></i></button>
+                            <button class="btn btn-text open-modal-btn" onclick="openModal('modal-3', 'market-basket')">View Full Case Study <i class="fa-solid fa-arrow-right"></i></button>
                         </div>
                     </article>
                 </div>
@@ -379,15 +379,16 @@
         </div>
     </footer>
 
-    <!-- Interactive Case Study Modal -->
-    <div id="case-study-modal" class="modal-overlay">
+    <!-- Interactive Case Study Modals -->
+    <!-- Modal 1: Promotional Waste Audit -->
+    <div id="modal-1" class="modal-overlay" onclick="if(event.target === this) closeModal('modal-1')">
         <div class="modal-container glass-card">
-            <button class="close-modal-btn" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+            <button class="close-modal-btn" aria-label="Close modal" onclick="closeModal('modal-1')"><i class="fa-solid fa-xmark"></i></button>
             <div class="modal-body">
                 <div class="modal-header">
-                    <span class="project-tag-badge" id="modal-project-badge">Category</span>
-                    <h2 id="modal-project-title">Project Title</h2>
-                    <div class="project-tech-badges" id="modal-project-tags">
+                    <span class="project-tag-badge modal-project-badge" id="modal-project-badge-1">Category</span>
+                    <h2 class="modal-project-title" id="modal-project-title-1">Project Title</h2>
+                    <div class="project-tech-badges modal-project-tags" id="modal-project-tags-1">
                         <!-- Populated by JS -->
                     </div>
                 </div>
@@ -397,38 +398,38 @@
                     <div class="modal-text-content">
                         <!-- Navigation Tabs inside Modal -->
                         <div class="modal-tabs">
-                            <button class="modal-tab-btn active" data-tab="tab-overview">Overview</button>
-                            <button class="modal-tab-btn" data-tab="tab-pipeline" id="modal-tab-pipeline-btn">Data Pipeline</button>
-                            <button class="modal-tab-btn" data-tab="tab-metrics">Analytical Deep Dive</button>
+                            <button class="modal-tab-btn active" data-tab="tab-overview-1">Overview</button>
+                            <button class="modal-tab-btn modal-tab-pipeline-btn" data-tab="tab-pipeline-1" id="modal-tab-pipeline-btn-1">Data Pipeline</button>
+                            <button class="modal-tab-btn" data-tab="tab-metrics-1">Analytical Deep Dive</button>
                         </div>
 
                         <!-- Tab: Overview -->
-                        <div class="modal-tab-content active" id="tab-overview">
+                        <div class="modal-tab-content active" id="tab-overview-1">
                             <h3>Context & Problem Statement</h3>
-                            <p id="modal-desc-context">Context paragraph.</p>
+                            <p class="modal-desc-context" id="modal-desc-context-1">Context paragraph.</p>
                             <h3>Key Achievements</h3>
-                            <ul class="modal-achievements-list" id="modal-desc-achievements">
+                            <ul class="modal-achievements-list modal-desc-achievements" id="modal-desc-achievements-1">
                                 <!-- Populated by JS -->
                             </ul>
                         </div>
 
                         <!-- Tab: Pipeline -->
-                        <div class="modal-tab-content" id="tab-pipeline">
-                            <h3 id="modal-pipeline-heading">Data Pipeline & Architecture</h3>
-                            <p id="modal-desc-pipeline">Pipeline paragraph.</p>
-                            <div class="code-block-wrapper" id="modal-code-wrapper">
+                        <div class="modal-tab-content" id="tab-pipeline-1">
+                            <h3 class="modal-pipeline-heading" id="modal-pipeline-heading-1">Data Pipeline & Architecture</h3>
+                            <p class="modal-desc-pipeline" id="modal-desc-pipeline-1">Pipeline paragraph.</p>
+                            <div class="code-block-wrapper modal-code-wrapper" id="modal-code-wrapper-1">
                                 <div class="code-block-header">
                                     <span>pipeline.py</span>
                                     <button class="copy-code-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i></button>
                                 </div>
-                                <pre><code class="code-font" id="modal-code-snippet"># Code block here</code></pre>
+                                <pre><code class="code-font modal-code-snippet" id="modal-code-snippet-1"># Code block here</code></pre>
                             </div>
                         </div>
 
                         <!-- Tab: Metrics -->
-                        <div class="modal-tab-content" id="tab-metrics">
+                        <div class="modal-tab-content" id="tab-metrics-1">
                             <h3>Analytical Impact & Validation</h3>
-                            <p id="modal-desc-metrics">Validation paragraph.</p>
+                            <p class="modal-desc-metrics" id="modal-desc-metrics-1">Validation paragraph.</p>
                             <div class="modal-metrics-container">
                                 <!-- Dynamic metrics boxes -->
                             </div>
@@ -438,7 +439,147 @@
                     <!-- Right column: Interactive Visual Graphic (Chart.js / SVG) -->
                     <div class="modal-visual-panel">
                         <div class="modal-chart-wrapper">
-                            <canvas id="modalInteractiveChart"></canvas>
+                            <canvas></canvas>
+                        </div>
+                        <div class="modal-visual-caption">
+                            <i class="fa-solid fa-chart-line-up"></i> Live Interactive Visualization
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: LTV Strategy -->
+    <div id="modal-2" class="modal-overlay" onclick="if(event.target === this) closeModal('modal-2')">
+        <div class="modal-container glass-card">
+            <button class="close-modal-btn" aria-label="Close modal" onclick="closeModal('modal-2')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-body">
+                <div class="modal-header">
+                    <span class="project-tag-badge modal-project-badge" id="modal-project-badge-2">Category</span>
+                    <h2 class="modal-project-title" id="modal-project-title-2">Project Title</h2>
+                    <div class="project-tech-badges modal-project-tags" id="modal-project-tags-2">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                
+                <div class="modal-content-grid">
+                    <!-- Left column: Details and structured tabs -->
+                    <div class="modal-text-content">
+                        <!-- Navigation Tabs inside Modal -->
+                        <div class="modal-tabs">
+                            <button class="modal-tab-btn active" data-tab="tab-overview-2">Overview</button>
+                            <button class="modal-tab-btn modal-tab-pipeline-btn" data-tab="tab-pipeline-2" id="modal-tab-pipeline-btn-2">Data Pipeline</button>
+                            <button class="modal-tab-btn" data-tab="tab-metrics-2">Analytical Deep Dive</button>
+                        </div>
+
+                        <!-- Tab: Overview -->
+                        <div class="modal-tab-content active" id="tab-overview-2">
+                            <h3>Context & Problem Statement</h3>
+                            <p class="modal-desc-context" id="modal-desc-context-2">Context paragraph.</p>
+                            <h3>Key Achievements</h3>
+                            <ul class="modal-achievements-list modal-desc-achievements" id="modal-desc-achievements-2">
+                                <!-- Populated by JS -->
+                            </ul>
+                        </div>
+
+                        <!-- Tab: Pipeline -->
+                        <div class="modal-tab-content" id="tab-pipeline-2">
+                            <h3 class="modal-pipeline-heading" id="modal-pipeline-heading-2">Data Pipeline & Architecture</h3>
+                            <p class="modal-desc-pipeline" id="modal-desc-pipeline-2">Pipeline paragraph.</p>
+                            <div class="code-block-wrapper modal-code-wrapper" id="modal-code-wrapper-2">
+                                <div class="code-block-header">
+                                    <span>pipeline.py</span>
+                                    <button class="copy-code-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i></button>
+                                </div>
+                                <pre><code class="code-font modal-code-snippet" id="modal-code-snippet-2"># Code block here</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Tab: Metrics -->
+                        <div class="modal-tab-content" id="tab-metrics-2">
+                            <h3>Analytical Impact & Validation</h3>
+                            <p class="modal-desc-metrics" id="modal-desc-metrics-2">Validation paragraph.</p>
+                            <div class="modal-metrics-container">
+                                <!-- Dynamic metrics boxes -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right column: Interactive Visual Graphic (Chart.js / SVG) -->
+                    <div class="modal-visual-panel">
+                        <div class="modal-chart-wrapper">
+                            <canvas></canvas>
+                        </div>
+                        <div class="modal-visual-caption">
+                            <i class="fa-solid fa-chart-line-up"></i> Live Interactive Visualization
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Market Basket Analysis -->
+    <div id="modal-3" class="modal-overlay" onclick="if(event.target === this) closeModal('modal-3')">
+        <div class="modal-container glass-card">
+            <button class="close-modal-btn" aria-label="Close modal" onclick="closeModal('modal-3')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-body">
+                <div class="modal-header">
+                    <span class="project-tag-badge modal-project-badge" id="modal-project-badge-3">Category</span>
+                    <h2 class="modal-project-title" id="modal-project-title-3">Project Title</h2>
+                    <div class="project-tech-badges modal-project-tags" id="modal-project-tags-3">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                
+                <div class="modal-content-grid">
+                    <!-- Left column: Details and structured tabs -->
+                    <div class="modal-text-content">
+                        <!-- Navigation Tabs inside Modal -->
+                        <div class="modal-tabs">
+                            <button class="modal-tab-btn active" data-tab="tab-overview-3">Overview</button>
+                            <button class="modal-tab-btn modal-tab-pipeline-btn" data-tab="tab-pipeline-3" id="modal-tab-pipeline-btn-3">Data Pipeline</button>
+                            <button class="modal-tab-btn" data-tab="tab-metrics-3">Analytical Deep Dive</button>
+                        </div>
+
+                        <!-- Tab: Overview -->
+                        <div class="modal-tab-content active" id="tab-overview-3">
+                            <h3>Context & Problem Statement</h3>
+                            <p class="modal-desc-context" id="modal-desc-context-3">Context paragraph.</p>
+                            <h3>Key Achievements</h3>
+                            <ul class="modal-achievements-list modal-desc-achievements" id="modal-desc-achievements-3">
+                                <!-- Populated by JS -->
+                            </ul>
+                        </div>
+
+                        <!-- Tab: Pipeline -->
+                        <div class="modal-tab-content" id="tab-pipeline-3">
+                            <h3 class="modal-pipeline-heading" id="modal-pipeline-heading-3">Data Pipeline & Architecture</h3>
+                            <p class="modal-desc-pipeline" id="modal-desc-pipeline-3">Pipeline paragraph.</p>
+                            <div class="code-block-wrapper modal-code-wrapper" id="modal-code-wrapper-3">
+                                <div class="code-block-header">
+                                    <span>pipeline.py</span>
+                                    <button class="copy-code-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i></button>
+                                </div>
+                                <pre><code class="code-font modal-code-snippet" id="modal-code-snippet-3"># Code block here</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Tab: Metrics -->
+                        <div class="modal-tab-content" id="tab-metrics-3">
+                            <h3>Analytical Impact & Validation</h3>
+                            <p class="modal-desc-metrics" id="modal-desc-metrics-3">Validation paragraph.</p>
+                            <div class="modal-metrics-container">
+                                <!-- Dynamic metrics boxes -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right column: Interactive Visual Graphic (Chart.js / SVG) -->
+                    <div class="modal-visual-panel">
+                        <div class="modal-chart-wrapper">
+                            <canvas></canvas>
                         </div>
                         <div class="modal-visual-caption">
                             <i class="fa-solid fa-chart-line-up"></i> Live Interactive Visualization

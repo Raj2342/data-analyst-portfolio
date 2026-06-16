@@ -525,117 +525,95 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         },
-        sentiment: {
-            badge: "Natural Language Processing",
-            title: "Real-time Market Sentiment Monitor",
-            tags: ["Python", "NLTK", "Airflow", "BigQuery", "Chart.js"],
-            context: "Cryptocurrency and modern stock assets fluctuate heavily based on community conversations and news. This dashboard scrapes social comments (Reddit, Twitter API) continuously, scores sentiment indexes, and forecasts price trend patterns.",
+        'market-basket': {
+            badge: "E-COMMERCE / RETAIL ANALYTICS",
+            title: "Market Basket Analysis: The Cross-Selling Engine",
+            tags: ["SQL", "Python", "Tableau", "Apriori"],
+            context: "For a grocery delivery company, maximizing revenue requires increasing the Average Order Value (AOV) per checkout. Forcing irrelevant items onto customers causes friction, so the objective was to identify products that are organically bought together to power a 'Frequently Bought Together' recommendation engine.",
             achievements: [
-                "Configured robust streaming data scrapers processing over 120 posts per minute under severe API limits.",
-                "Applied NLTK VADER sentiment analyzer to tag social feedback as positive, neutral, or negative.",
-                "Engineered a correlation pipeline matching rolling sentiment averages with hourly token valuations.",
-                "Produced predictive trading signals demonstrating a 91% accuracy correlation on major market indicators."
+                "Identified 'Anchor' products that drive total basket volume to optimize promotional discounts.",
+                "Calculated 'Directional Pull' between product pairs to determine which items lead a sale and which merely follow, preventing wasted marketing spend."
             ],
-            pipeline: "A Python streaming daemon scrapes real-time posts. Airflow pipelines clean token strings, execute lexicon matching to compute score matrices, and persist data in BigQuery warehouses. The web dashboard draws records using a light REST API.",
-            code: `import nltk
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-import requests
-
-# Download VADER lexicon resources
-nltk.download('vader_lexicon')
-sia = SentimentIntensityAnalyzer()
-
-def process_social_stream(posts):
-    scored_dataset = []
-    for post in posts:
-        # Generate VADER scores
-        score = sia.polarity_scores(post['text'])
-        compound_score = score['compound']
-        
-        scored_dataset.append({
-            'post_id': post['id'],
-            'timestamp': post['created_at'],
-            'sentiment_score': compound_score,
-            'category': 'POSITIVE' if compound_score >= 0.05 else 'NEGATIVE' if compound_score <= -0.05 else 'NEUTRAL'
-        })
-    return scored_dataset`,
+            pipelineTabName: "Business Questions",
+            questions: [
+                { title: "1. What are the \"Anchor\" Products? (The Cart Drivers)", detail: "Calculated order volume and Average Basket Size to identify high-volume staples that drive traffic." },
+                { title: "2. What are the Top 50 \"Frequently Bought Together\" Pairs?", detail: "Used SQL SELF JOINs to identify exact item-to-item relationships that happen consistently to power UI recommendations." },
+                { title: "3. What is the \"Directional Pull\" of a Pair? (Lead vs. Follow)", detail: "Calculated conditional probability to determine if discounting a specific item organically drives the sale of its paired counterpart." },
+                { title: "4. Are these pairs \"Impulse Buys\" or \"Habitual Reorders\"?", detail: "Cross-referenced top pairs with reorder flags to calculate the Reorder Ratio, isolating habitual purchases for \"Subscribe & Save\" targeting." },
+                { title: "5. Demographic-Based Bundling", detail: "Joined transaction data with demographics to design specific product bundles tailored to high-income versus budget shoppers." },
+                { title: "6. The Discount Trap & Halo Effect", detail: "Analyzed promotional data to reveal if customers buying discounted items also purchased full-priced items, validating true promotion profitability." }
+            ],
+            metricsHeading: "Cross-Sell Telemetry Breakdown",
+            metricsDescription: "Key metrics showcasing bundling efficiency, recommendation accuracy, and transactional lift.",
             metrics: [
-                { value: "91%", label: "Trend Correlation" },
-                { value: "120/m", label: "Scraped Telemetry" },
-                { value: "+30%", label: "Trading Return Indicator" },
-                { value: "1.5M", label: "Comments Scored" }
+                { value: "2.8x", label: "AOV Bundling Lift" },
+                { value: "88%", label: "Recommendation Accuracy" },
+                { value: "+14.6%", label: "Average Order Value Lift" },
+                { value: "1.4M", label: "Transactions Processed" }
             ],
-            chartConfig: {
-                type: 'radar',
-                data: {
-                    labels: ['Crypto Market', 'Tech Equities', 'AI Sectors', 'E-Commerce', 'Clean Energy'],
-                    datasets: [
-                        {
-                            label: 'Sentiment Index (Avg)',
-                            data: [85, 78, 92, 65, 70],
-                            backgroundColor: 'rgba(56, 178, 172, 0.15)',
-                            borderColor: '#38B2AC',
-                            borderWidth: 1.5
-                        },
-                        {
-                            label: 'Price Correlation Index',
-                            data: [80, 75, 88, 62, 74],
-                            backgroundColor: 'rgba(49, 130, 206, 0.15)',
-                            borderColor: '#3182CE',
-                            borderWidth: 1.5
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: true, labels: { color: '#A0AEC0', font: { size: 8 } } } },
-                    scales: {
-                        r: { 
-                            angleLines: { display: true, color: 'rgba(255, 255, 255, 0.05)' }, 
-                            ticks: { display: false }, 
-                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                            pointLabels: { color: '#F7FAFC', font: { family: 'Inter', size: 9, weight: '600' } },
-                            min: 50, 
-                            max: 100 
-                        }
-                    }
-                }
+            imageSrc: "omnimart_chart.png",
+            dashboardUrl: "https://public.tableau.com/views/OmniMart_Command_Center_Final/Home",
+            dashboardBtnText: "Live Tableau Dashboard"
+        }
+    };
+
+    // Modal & Telemetry Scoped Logic
+    let activeModal = null;
+    let modalChartInstance = null; // Hold current chart instance to destroy/recreate
+
+    // Global Modal Trigger functions
+    window.openModal = function(modalId, projectId) {
+        const modalEl = document.getElementById(modalId);
+        const data = projectData[projectId];
+        if (modalEl && data) {
+            activeModal = modalEl;
+            populateModal(data, modalEl);
+            modalEl.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Stop scroll
+        }
+    };
+
+    window.closeModal = function(modalId) {
+        const modalEl = document.getElementById(modalId);
+        if (modalEl) {
+            modalEl.classList.remove('active');
+            document.body.style.overflow = ''; // Resume scroll
+            if (activeModal === modalEl) {
+                activeModal = null;
             }
         }
     };
 
-    // Modal DOM Elements
-    const modal = document.getElementById('case-study-modal');
-    const modalTitle = document.getElementById('modal-project-title');
-    const modalBadge = document.getElementById('modal-project-badge');
-    const modalTags = document.getElementById('modal-project-tags');
-    const modalDescContext = document.getElementById('modal-desc-context');
-    const modalDescAchievements = document.getElementById('modal-desc-achievements');
-    const modalDescPipeline = document.getElementById('modal-desc-pipeline');
-    const modalCodeSnippet = document.getElementById('modal-code-snippet');
-    const modalDescMetrics = document.getElementById('modal-desc-metrics');
-    const modalMetricsContainer = document.querySelector('.modal-metrics-container');
-    const closeModalBtn = document.querySelector('.close-modal-btn');
-    
-    let modalChartInstance = null; // Hold current chart instance to destroy/recreate
+    // Close Modal triggers via event delegation
+    document.querySelectorAll('.modal-overlay').forEach(modalEl => {
+        modalEl.addEventListener('click', (e) => {
+            if (e.target === modalEl) {
+                closeModal(modalEl.id);
+            }
+        });
+    });
 
-    // Open Modal Click Handlers on Cards
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach(card => {
-        card.addEventListener('click', () => {
-            const projectId = card.getAttribute('data-project-id');
-            const data = projectData[projectId];
-            if (data) {
-                populateModal(data);
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Stop scroll
+    document.querySelectorAll('.close-modal-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modalEl = btn.closest('.modal-overlay');
+            if (modalEl) {
+                closeModal(modalEl.id);
             }
         });
     });
 
     // Populate Content into Modal
-    function populateModal(data) {
+    function populateModal(data, modalEl) {
+        const modalTitle = modalEl.querySelector('.modal-project-title');
+        const modalBadge = modalEl.querySelector('.modal-project-badge');
+        const modalTags = modalEl.querySelector('.modal-project-tags');
+        const modalDescContext = modalEl.querySelector('.modal-desc-context');
+        const modalDescAchievements = modalEl.querySelector('.modal-desc-achievements');
+        const modalDescPipeline = modalEl.querySelector('.modal-desc-pipeline');
+        const modalCodeSnippet = modalEl.querySelector('.modal-code-snippet');
+        const modalDescMetrics = modalEl.querySelector('.modal-desc-metrics');
+        const modalMetricsContainer = modalEl.querySelector('.modal-metrics-container');
+
         modalTitle.textContent = data.title;
         modalBadge.textContent = data.badge;
         
@@ -659,9 +637,9 @@ def process_social_stream(posts):
         });
 
         // Dynamic Pipeline / Business Questions Tab Title & Content
-        const pipelineTabBtn = document.getElementById('modal-tab-pipeline-btn');
-        const pipelineHeading = document.getElementById('modal-pipeline-heading');
-        const codeWrapper = document.getElementById('modal-code-wrapper');
+        const pipelineTabBtn = modalEl.querySelector('.modal-tab-pipeline-btn');
+        const pipelineHeading = modalEl.querySelector('.modal-pipeline-heading');
+        const codeWrapper = modalEl.querySelector('.modal-code-wrapper');
 
         if (data.pipelineTabName) {
             pipelineTabBtn.textContent = data.pipelineTabName;
@@ -694,7 +672,7 @@ def process_social_stream(posts):
         }
 
         // Metrics Tab & General layout
-        const tabMetricsHeading = document.querySelector('#tab-metrics h3');
+        const tabMetricsHeading = modalEl.querySelector('.modal-tab-content[id^="tab-metrics"] h3');
         if (data.metricsHeading) {
             tabMetricsHeading.textContent = data.metricsHeading;
         } else {
@@ -718,19 +696,25 @@ def process_social_stream(posts):
         });
 
         // Handle dynamic visual panels (image or canvas chart)
-        const chartWrapper = document.querySelector('.modal-chart-wrapper');
+        const chartWrapper = modalEl.querySelector('.modal-chart-wrapper');
         if (modalChartInstance) {
             modalChartInstance.destroy();
             modalChartInstance = null;
         }
 
-        const visualCaption = document.querySelector('.modal-visual-caption');
+        const visualCaption = modalEl.querySelector('.modal-visual-caption');
         if (data.imageSrc) {
-            chartWrapper.innerHTML = `<img src="${data.imageSrc}" alt="Dashboard Inside" class="contained-dashboard-img">`;
+            if (data.imageSrc === 'omnimart_chart.png') {
+                chartWrapper.innerHTML = `<img src="omnimart_chart.png" alt="OmniMart Market Basket Chart" style="width: 100%; height: auto; max-height: 380px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto 20px auto;">`;
+            } else {
+                chartWrapper.innerHTML = `<img src="${data.imageSrc}" alt="Dashboard Inside" class="contained-dashboard-img">`;
+            }
         } else {
-            chartWrapper.innerHTML = `<canvas id="modalInteractiveChart"></canvas>`;
-            const modalChartCtx = document.getElementById('modalInteractiveChart').getContext('2d');
-            modalChartInstance = new Chart(modalChartCtx, data.chartConfig);
+            chartWrapper.innerHTML = `<canvas></canvas>`;
+            const modalChartCtx = chartWrapper.querySelector('canvas').getContext('2d');
+            if (typeof Chart !== 'undefined') {
+                modalChartInstance = new Chart(modalChartCtx, data.chartConfig);
+            }
         }
 
         if (data.dashboardUrl) {
@@ -740,13 +724,13 @@ def process_social_stream(posts):
         }
 
         // Reset Tabs to active overview
-        const tabBtns = document.querySelectorAll('.modal-tab-btn');
-        const tabContents = document.querySelectorAll('.modal-tab-content');
+        const tabBtns = modalEl.querySelectorAll('.modal-tab-btn');
+        const tabContents = modalEl.querySelectorAll('.modal-tab-content');
         tabBtns.forEach(btn => btn.classList.remove('active'));
         tabContents.forEach(content => content.classList.remove('active'));
         
-        document.querySelector('[data-tab="tab-overview"]').classList.add('active');
-        document.getElementById('tab-overview').classList.add('active');
+        modalEl.querySelector('[data-tab^="tab-overview"]').classList.add('active');
+        modalEl.querySelector('.modal-tab-content[id^="tab-overview"]').classList.add('active');
     }
 
     // Modal Tabs Navigation Logic
@@ -755,44 +739,39 @@ def process_social_stream(posts):
         btn.addEventListener('click', (e) => {
             e.stopPropagation(); // Avoid triggering card events
             const targetTab = btn.getAttribute('data-tab');
-            
-            // Remove active classes
-            tabBtns.forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.modal-tab-content').forEach(c => c.classList.remove('active'));
-            
-            // Set active
-            btn.classList.add('active');
-            document.getElementById(targetTab).classList.add('active');
+            const parentModal = btn.closest('.modal-overlay');
+            if (parentModal) {
+                // Remove active classes
+                parentModal.querySelectorAll('.modal-tab-btn').forEach(b => b.classList.remove('active'));
+                parentModal.querySelectorAll('.modal-tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Set active
+                btn.classList.add('active');
+                parentModal.querySelector(`#${targetTab}`).classList.add('active');
+            }
         });
     });
 
-    // Close Modal Handler
-    function closeModal() {
-        modal.classList.remove('active');
-        document.body.style.overflow = ''; // Resume scroll
-    }
-
-    closeModalBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
-
     // Copy Code snippet to Clipboard
-    const copyCodeBtn = document.querySelector('.copy-code-btn');
-    copyCodeBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(modalCodeSnippet.textContent)
-            .then(() => {
-                const originalHTML = copyCodeBtn.innerHTML;
-                copyCodeBtn.innerHTML = '<i class="fa-solid fa-check" style="color: #48BB78;"></i>';
-                setTimeout(() => {
-                    copyCodeBtn.innerHTML = originalHTML;
-                }, 2000);
-            })
-            .catch(err => {
-                console.error("Failed to copy text: ", err);
-            });
+    const copyCodeBtns = document.querySelectorAll('.copy-code-btn');
+    copyCodeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const parentModal = btn.closest('.modal-overlay');
+            if (parentModal) {
+                const codeSnippet = parentModal.querySelector('.modal-code-snippet');
+                navigator.clipboard.writeText(codeSnippet.textContent)
+                    .then(() => {
+                        const originalHTML = btn.innerHTML;
+                        btn.innerHTML = '<i class="fa-solid fa-check" style="color: #48BB78;"></i>';
+                        setTimeout(() => {
+                            btn.innerHTML = originalHTML;
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error("Failed to copy text: ", err);
+                    });
+            }
+        });
     });
 
 

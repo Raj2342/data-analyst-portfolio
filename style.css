@@ -1477,11 +1477,11 @@ a:hover {
 .contained-dashboard-img {
     width: 100%;
     height: auto;
-    max-height: 350px;
+    max-height: 380px;
     object-fit: contain;
     border-radius: 8px;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
 }
 
 .live-dashboard-btn {
