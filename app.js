@@ -295,10 +295,10 @@ document.addEventListener('DOMContentLoaded', () => {
     new Chart(radarCtx, {
         type: 'radar',
         data: {
-            labels: ['SQL & Querying', 'Data Engineering', 'Machine Learning', 'BI & Reporting', 'Stat Analysis', 'Business Strategy'],
+            labels: ['SQL & Querying', 'Data Engineering', 'Data Modeling', 'BI & Reporting', 'Cloud Warehousing', 'Stat Analysis', 'Business Strategy'],
             datasets: [{
                 label: 'Competency Level',
-                data: [95, 88, 85, 92, 87, 82],
+                data: [90, 85, 85, 90, 80, 75, 80],
                 backgroundColor: 'rgba(49, 130, 206, 0.16)', // Blue fill
                 borderColor: '#3182CE',
                 borderWidth: 2,
@@ -821,68 +821,72 @@ document.addEventListener('DOMContentLoaded', () => {
         return re.test(String(email).toLowerCase());
     }
 
-    // Input blur dynamic checking
-    const inputsToValidate = form.querySelectorAll('input[required], textarea[required]');
-    inputsToValidate.forEach(input => {
-        input.addEventListener('blur', () => {
-            checkFieldValidity(input);
-        });
-        
-        input.addEventListener('input', () => {
-            if (input.parentElement.classList.contains('invalid')) {
-                checkFieldValidity(input);
-            }
-        });
-    });
-
-    function checkFieldValidity(field) {
-        let isValid = true;
-        if (field.value.trim() === '') {
-            isValid = false;
-        } else if (field.type === 'email' && !isValidEmail(field.value)) {
-            isValid = false;
-        }
-
-        if (isValid) {
-            field.parentElement.classList.remove('invalid');
-        } else {
-            field.parentElement.classList.add('invalid');
-        }
-        return isValid;
-    }
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        let isFormValid = true;
+    if (form) {
+        // Input blur dynamic checking
+        const inputsToValidate = form.querySelectorAll('input[required], textarea[required]');
         inputsToValidate.forEach(input => {
-            const isFieldValid = checkFieldValidity(input);
-            if (!isFieldValid) {
-                isFormValid = false;
+            input.addEventListener('blur', () => {
+                checkFieldValidity(input);
+            });
+            
+            input.addEventListener('input', () => {
+                if (input.parentElement.classList.contains('invalid')) {
+                    checkFieldValidity(input);
+                }
+            });
+        });
+
+        function checkFieldValidity(field) {
+            let isValid = true;
+            if (field.value.trim() === '') {
+                isValid = false;
+            } else if (field.type === 'email' && !isValidEmail(field.value)) {
+                isValid = false;
+            }
+
+            if (isValid) {
+                field.parentElement.classList.remove('invalid');
+            } else {
+                field.parentElement.classList.add('invalid');
+            }
+            return isValid;
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            let isFormValid = true;
+            inputsToValidate.forEach(input => {
+                const isFieldValid = checkFieldValidity(input);
+                if (!isFieldValid) {
+                    isFormValid = false;
+                }
+            });
+
+            if (isFormValid) {
+                // Simulate API submit delay
+                const submitBtn = form.querySelector('.form-submit-btn');
+                const originalBtnHTML = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span>Processing...</span> <i class="fa-solid fa-circle-notch fa-spin"></i>';
+                
+                setTimeout(() => {
+                    form.style.display = 'none';
+                    if (successMsg) successMsg.style.display = 'flex';
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnHTML;
+                    form.reset();
+                }, 1200);
             }
         });
 
-        if (isFormValid) {
-            // Simulate API submit delay
-            const submitBtn = form.querySelector('.form-submit-btn');
-            const originalBtnHTML = submitBtn.innerHTML;
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span>Processing...</span> <i class="fa-solid fa-circle-notch fa-spin"></i>';
-            
-            setTimeout(() => {
-                form.style.display = 'none';
-                successMsg.style.display = 'flex';
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnHTML;
-                form.reset();
-            }, 1200);
+        if (resetFormBtn) {
+            resetFormBtn.addEventListener('click', () => {
+                if (successMsg) successMsg.style.display = 'none';
+                form.style.display = 'flex';
+            });
         }
-    });
-
-    resetFormBtn.addEventListener('click', () => {
-        successMsg.style.display = 'none';
-        form.style.display = 'flex';
-    });
+    }
 
     // Carousel navigation scrolling
     const projectGrid = document.querySelector('.projects-grid');
