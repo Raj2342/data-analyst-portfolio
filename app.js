@@ -1,5 +1,5 @@
 /**
- * Alex Rivera - Portfolio Web Application Javascript
+ * Raj - Portfolio Web Application Javascript
  * Handles interactive backgrounds, charts, mouse tracking, and modals.
  */
 
