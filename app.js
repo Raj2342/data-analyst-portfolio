@@ -554,7 +554,38 @@ document.addEventListener('DOMContentLoaded', () => {
             imageSrc: "omnimart_chart.png",
             dashboardUrl: "https://public.tableau.com/views/OmniMart_Command_Center_Final/Home",
             dashboardBtnText: "Live Tableau Dashboard"
+        },
+        'iowa-liquor': {
+            badge: "MARKET SHARE & COMPETITIVE INTELLIGENCE",
+            title: "Market Share Recovery Strategy: Iowa Liquor Sales",
+            tags: ["SQL", "Power BI", "Geospatial Analysis", "DAX"],
+            context: "Our brand is bleeding market share and physical shelf space, but our sales and executive teams lack the localized, tactical data required to pinpoint exactly where we are losing, which specific competitors are beating us, and which individual stores we must target to recover lost revenue.",
+            achievements: [
+                "Pinpointed geographical market share bleed and identified exact cities and counties with critical distribution gaps.",
+                "Mapped store-level product assortments, providing field sales reps with actionable targets to win back physical shelf space.",
+                "Tracked seasonal buying peaks to optimize revenue capture against major market players during high-volume months."
+            ],
+            pipelineTabName: "Business Questions",
+            questions: [
+                { title: "1. Market Share & Store Presence", detail: "Are we losing ground to our primary competitor in overall market share and physical store presence?" },
+                { title: "2. Geographic Bleed Analysis", detail: "Geographically, where is our specific brand bleeding the most compared to the overall market?" },
+                { title: "3. Localized Distribution Gaps", detail: "Within our target counties, which specific cities have the largest distribution gaps where our competitor's products are more widely available than ours?" },
+                { title: "4. Store-Level Assortment Gaps", detail: "At the exact store level, what specific product assortment or sales velocity gaps exist that our sales reps can action immediately to win back revenue?" },
+                { title: "5. Peak Buying Seasons", detail: "When are the peak buying seasons for the overall category, and are we capturing our expected share of revenue during those high-volume months compared to the major market players?" }
+            ],
+            metricsHeading: "Market Recovery Telemetry",
+            metricsDescription: "Key telemetry indicators tracking shelf space recovery, store distribution coverage, and competitive market share gains.",
+            metrics: [
+                { value: "18.2%", label: "Market Share Bleed Halted" },
+                { value: "940+", label: "Target Stores Mapped" },
+                { value: "+$2.4M", label: "Revenue Opportunity Identified" },
+                { value: "12%", label: "Distribution Gap Closed" }
+            ],
+            imageSrc: "iowa_liquor_chart.png",
+            dashboardUrl: "https://app.powerbi.com/view?r=eyJrIjoiYmE0NGE1ZGEtOTlhYy00N2ZkLTliNzYtODIzNzZhMjkyOWYwIiwidCI6IjM0YmQ4YmVkLTJhYzEtNDFhZS05ZjA4LTRlMGEzZjExNzA2YyJ9",
+            dashboardBtnText: "Live Power BI Dashboard"
         }
+
     };
 
     // Modal & Telemetry Scoped Logic
@@ -706,6 +737,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.imageSrc) {
             if (data.imageSrc === 'omnimart_chart.png') {
                 chartWrapper.innerHTML = `<img src="omnimart_chart.png" alt="OmniMart Market Basket Chart" style="width: 100%; height: auto; max-height: 380px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto 20px auto;">`;
+            } else if (data.imageSrc === 'iowa_liquor_chart.png') {
+                chartWrapper.innerHTML = `<img src="iowa_liquor_chart.png" alt="Iowa Liquor Market Share Chart" style="width: 100%; height: auto; max-height: 380px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto 20px auto;">`;
             } else {
                 chartWrapper.innerHTML = `<img src="${data.imageSrc}" alt="Dashboard Inside" class="contained-dashboard-img">`;
             }
@@ -851,4 +884,21 @@ document.addEventListener('DOMContentLoaded', () => {
         form.style.display = 'flex';
     });
 
+    // Carousel navigation scrolling
+    const projectGrid = document.querySelector('.projects-grid');
+    const slideLeftBtn = document.getElementById('slide-left');
+    const slideRightBtn = document.getElementById('slide-right');
+    const scrollAmount = 380; 
+
+    if (slideLeftBtn && slideRightBtn && projectGrid) {
+        slideLeftBtn.addEventListener('click', () => {
+            projectGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        slideRightBtn.addEventListener('click', () => {
+            projectGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+    }
+
 });
+

@@ -11,7 +11,7 @@
     <!-- FontAwesome for Premium Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -216,8 +216,10 @@
                     <p>A handpicked selection of analyses, machine learning pipelines, and dashboard deployments mapping out high-impact resolutions.</p>
                 </div>
 
-                <div class="projects-grid">
-                    <!-- Project Card 1 -->
+                <div class="carousel-wrapper" style="position: relative; width: 100%;">
+                    <button class="carousel-btn left-btn" id="slide-left" aria-label="Slide Left">❮</button>
+                    <div class="projects-grid">
+                        <!-- Project Card 1 -->
                     <article class="project-card glass-card" data-tilt data-tilt-max="10" data-project-id="ecommerce">
                         <div class="project-img-wrapper">
                             <img src="assets/cart-dashboard.png" alt="Cart Abandonment Dashboard" class="project-img">
@@ -291,9 +293,36 @@
                             <button class="btn btn-text open-modal-btn" onclick="openModal('modal-3', 'market-basket')">View Full Case Study <i class="fa-solid fa-arrow-right"></i></button>
                         </div>
                     </article>
+
+                    <!-- Project Card 4 -->
+                    <article class="project-card glass-card" data-tilt data-tilt-max="10" data-project-id="iowa-liquor">
+                        <div class="project-img-wrapper">
+                            <img src="assets/iowa_liquor_dashbord.png" alt="Iowa Liquor Dashboard" class="project-img">
+                            <div class="project-overlay" onclick="openModal('modal-4', 'iowa-liquor')">
+                                <span class="btn btn-secondary">Explore Study <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-meta">
+                                <span class="project-tag-badge">MARKET SHARE & COMPETITIVE INTELLIGENCE</span>
+                                <span class="project-metric-highlight code-font"><i class="fa-solid fa-arrow-trend-down"></i> ↓ Shelf Space Bleed Stopped</span>
+                            </div>
+                            <h3>Market Share Recovery Strategy: Iowa Liquor Sales</h3>
+                            <p>Identified geographical market share bleed and store-level distribution gaps for a regional liquor vendor. Built localized, actionable targeting data to recover lost revenue from direct competitors.</p>
+                            <div class="project-tech-badges">
+                                <span><i class="fa-solid fa-database"></i> SQL</span>
+                                <span><i class="fa-solid fa-chart-column"></i> Power BI</span>
+                                <span><i class="fa-solid fa-map-location-dot"></i> Geospatial Analysis</span>
+                                <span><i class="fa-solid fa-gears"></i> DAX</span>
+                            </div>
+                            <button class="btn btn-text open-modal-btn" onclick="openModal('modal-4', 'iowa-liquor')">View Full Case Study <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </article>
                 </div>
+                <button class="carousel-btn right-btn" id="slide-right" aria-label="Slide Right">❯</button>
             </div>
-        </section>
+        </div>
+    </section>
 
         <!-- Contact Section -->
         <section id="contact" class="contact-section">
@@ -570,6 +599,76 @@
                         <div class="modal-tab-content" id="tab-metrics-3">
                             <h3>Analytical Impact & Validation</h3>
                             <p class="modal-desc-metrics" id="modal-desc-metrics-3">Validation paragraph.</p>
+                            <div class="modal-metrics-container">
+                                <!-- Dynamic metrics boxes -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right column: Interactive Visual Graphic (Chart.js / SVG) -->
+                    <div class="modal-visual-panel">
+                        <div class="modal-chart-wrapper">
+                            <canvas></canvas>
+                        </div>
+                        <div class="modal-visual-caption">
+                            <i class="fa-solid fa-chart-line-up"></i> Live Interactive Visualization
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Iowa Liquor Sales -->
+    <div id="modal-4" class="modal-overlay" onclick="if(event.target === this) closeModal('modal-4')">
+        <div class="modal-container glass-card">
+            <button class="close-modal-btn" aria-label="Close modal" onclick="closeModal('modal-4')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-body">
+                <div class="modal-header">
+                    <span class="project-tag-badge modal-project-badge" id="modal-project-badge-4">Category</span>
+                    <h2 class="modal-project-title" id="modal-project-title-4">Project Title</h2>
+                    <div class="project-tech-badges modal-project-tags" id="modal-project-tags-4">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                
+                <div class="modal-content-grid">
+                    <!-- Left column: Details and structured tabs -->
+                    <div class="modal-text-content">
+                        <!-- Navigation Tabs inside Modal -->
+                        <div class="modal-tabs">
+                            <button class="modal-tab-btn active" data-tab="tab-overview-4">Overview</button>
+                            <button class="modal-tab-btn modal-tab-pipeline-btn" data-tab="tab-pipeline-4" id="modal-tab-pipeline-btn-4">Data Pipeline</button>
+                            <button class="modal-tab-btn" data-tab="tab-metrics-4">Analytical Deep Dive</button>
+                        </div>
+
+                        <!-- Tab: Overview -->
+                        <div class="modal-tab-content active" id="tab-overview-4">
+                            <h3>The Core Business Problem</h3>
+                            <p class="modal-desc-context" id="modal-desc-context-4">Context paragraph.</p>
+                            <h3>Key Achievements</h3>
+                            <ul class="modal-achievements-list modal-desc-achievements" id="modal-desc-achievements-4">
+                                <!-- Populated by JS -->
+                            </ul>
+                        </div>
+
+                        <!-- Tab: Pipeline -->
+                        <div class="modal-tab-content" id="tab-pipeline-4">
+                            <h3 class="modal-pipeline-heading" id="modal-pipeline-heading-4">Data Pipeline & Architecture</h3>
+                            <p class="modal-desc-pipeline" id="modal-desc-pipeline-4">Pipeline paragraph.</p>
+                            <div class="code-block-wrapper modal-code-wrapper" id="modal-code-wrapper-4">
+                                <div class="code-block-header">
+                                    <span>pipeline.py</span>
+                                    <button class="copy-code-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i></button>
+                                </div>
+                                <pre><code class="code-font modal-code-snippet" id="modal-code-snippet-4"># Code block here</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Tab: Metrics -->
+                        <div class="modal-tab-content" id="tab-metrics-4">
+                            <h3>Analytical Impact & Validation</h3>
+                            <p class="modal-desc-metrics" id="modal-desc-metrics-4">Validation paragraph.</p>
                             <div class="modal-metrics-container">
                                 <!-- Dynamic metrics boxes -->
                             </div>
