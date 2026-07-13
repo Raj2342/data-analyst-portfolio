@@ -384,9 +384,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ecommerce: {
             badge: "E-COMMERCE ANALYTICS",
             title: "Promotional Waste Audit: Cart Abandonment & Margin Optimization",
-            imageSrc: "assets/cart-dashboard-inside.png",
             dashboardUrl: "https://app.powerbi.com/view?r=eyJrIjoiOWE2ODY3Y2ItNGM1Yi00ZDhhLTk4ZGUtNDQ3YTI0ZTc2ZTYyIiwidCI6IjM0YmQ4YmVkLTJhYzEtNDFhZS05ZjA4LTRlMGEzZjExNzA2YyJ9",
-            dashboardBtnText: "Live Power BI Dashboard",
+            dashboardBtnText: "👉 Click here to see full dashboard",
+            githubUrl: "https://github.com/Raj2342/cart-abendment--dbt",
             tags: ["SQL", "Python", "Tableau", "Business Intelligence"],
             context: "A US e-commerce startup generating $10M annually faced a 70% cart abandonment rate, leaving $7M at risk. The core issue was a 'dumb discount system' that automatically sent a 10% discount to every abandoned cart. This created a massive two-fold financial bleed:",
             achievements: [
@@ -407,56 +407,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 { value: "$1.73bn", label: "Actual Revenue" },
                 { value: "$2.17bn", label: "Revenue Bleed" },
                 { value: "$1.33bn", label: "Recoverable Revenue" }
-            ],
-            chartConfig: {
-                type: 'bar',
-                data: {
-                    labels: ['Revenue at Risk', 'Margin Saved', 'Rescued Revenue', 'Ad Burn Stopped'],
-                    datasets: [{
-                        label: 'Financial Impact ($ Millions)',
-                        data: [7.0, 1.8, 3.2, 1.1],
-                        backgroundColor: [
-                            'rgba(245, 101, 101, 0.7)',
-                            'rgba(79, 209, 197, 0.7)',
-                            'rgba(66, 153, 225, 0.7)',
-                            'rgba(79, 209, 197, 0.7)'
-                        ],
-                        borderColor: [
-                            '#F56565',
-                            '#38B2AC',
-                            '#3182CE',
-                            '#38B2AC'
-                        ],
-                        borderWidth: 1.5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'y',
-                    plugins: { 
-                        legend: { display: false },
-                        tooltip: { callbacks: { label: function(context) { return '$' + context.raw + 'M'; } } }
-                    },
-                    scales: {
-                        x: { 
-                            grid: { color: 'rgba(255, 255, 255, 0.05)' }, 
-                            title: { display: true, text: 'USD Millions', font: { size: 9 }, color: '#A0AEC0' },
-                            ticks: { color: '#A0AEC0', font: { size: 9 } }
-                        },
-                        y: { 
-                            grid: { display: false },
-                            ticks: { color: '#A0AEC0', font: { size: 9 } }
-                        }
-                    }
-                }
-            }
+            ]
         },
         'audio-streaming': {
             badge: "B2C SaaS / AUDIO STREAMING",
             title: "LTV-Based Acquisition Strategy: Optimizing Marketing Spend",
             dashboardUrl: "https://app.powerbi.com/view?r=eyJrIjoiZDY3ODEzYTctOGY3MS00MDQ0LWEwZWMtZDcxYTM2MjJmY2Y0IiwidCI6IjM0YmQ4YmVkLTJhYzEtNDFhZS05ZjA4LTRlMGEzZjExNzA2YyJ9",
-            dashboardBtnText: "Live Interactive Visualization",
+            dashboardBtnText: "👉 CLICK HERE TO SEE FULL DASHBOARD",
+            githubUrl: "https://github.com/Raj2342/Marketing-channel-roi",
             tags: ["SQL", "Power BI", "Python", "Cohort Analysis"],
             context: "For a subscription audio streaming app, not all acquired customers are created equal. The business was burning cash by spending acquisition budgets on low-value users who churned after a single month of service. The objective was to join member profiles and transaction logs to identify which registration channels produced 'Power Users' (12+ months retention) and shift the marketing budget accordingly.<br><br><strong>The Core Metric:</strong><div class=\"formula-block\" style=\"display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: rgba(79, 209, 197, 0.05); border: 1px solid rgba(79, 209, 197, 0.15); padding: 16px; border-radius: 8px; margin: 16px 0; font-family: 'Roboto Mono', monospace; font-size: 1rem; color: var(--accent-teal); width: 100%;\"><span style=\"font-weight: 700;\">LTV</span><span>=</span><div style=\"display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1; padding: 0 4px;\"><span style=\"border-bottom: 1.5px solid var(--accent-teal); padding-bottom: 2px;\">ARPU</span><span style=\"padding-top: 2px;\">Churn Rate</span></div><span>×</span><span>Gross Margin</span></div>",
             achievements: [
@@ -478,52 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { value: "$110.1999M", label: "Expected Amount" },
                 { value: "557.97K", label: "Total Vip User" },
                 { value: "$63.79M", label: "Vip User Amount" }
-            ],
-            chartConfig: {
-                type: 'line',
-                data: {
-                    labels: ['Month 1', 'Month 3', 'Month 6', 'Month 9', 'Month 12'],
-                    datasets: [
-                        {
-                            label: 'Social Ads (Low LTV)',
-                            data: [100, 45, 25, 12, 5],
-                            borderColor: '#E53E3E',
-                            borderWidth: 1.5,
-                            borderDash: [4, 4],
-                            fill: false,
-                            tension: 0.2,
-                            pointRadius: 2
-                        },
-                        {
-                            label: 'Targeted Search (High LTV)',
-                            data: [100, 85, 75, 68, 62],
-                            borderColor: '#38B2AC',
-                            backgroundColor: 'rgba(56, 178, 172, 0.1)',
-                            borderWidth: 2,
-                            fill: true,
-                            tension: 0.2,
-                            pointRadius: 4,
-                            pointBackgroundColor: '#38B2AC'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: true, labels: { boxWidth: 12, color: '#A0AEC0', font: { size: 9 } } } },
-                    scales: {
-                        x: { 
-                            grid: { display: false },
-                            ticks: { color: '#A0AEC0', font: { size: 9 } }
-                        },
-                        y: { 
-                            grid: { color: 'rgba(255, 255, 255, 0.05)' }, 
-                            title: { display: true, text: 'User Retention Rate (%)', font: { size: 9 }, color: '#A0AEC0' },
-                            ticks: { color: '#A0AEC0', font: { size: 9 } }
-                        }
-                    }
-                }
-            }
+            ]
         },
         'market-basket': {
             badge: "E-COMMERCE / RETAIL ANALYTICS",
@@ -551,9 +464,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 { value: "+14.6%", label: "Average Order Value Lift" },
                 { value: "1.4M", label: "Transactions Processed" }
             ],
-            imageSrc: "omnimart_chart.png",
             dashboardUrl: "https://public.tableau.com/views/OmniMart_Command_Center_Final/Home",
-            dashboardBtnText: "Live Tableau Dashboard"
+            dashboardBtnText: "👉 CLICK HERE TO SEE FULL DASHBOARD",
+            githubUrl: "https://github.com/Raj2342/market-basket-analysis"
         },
         'iowa-liquor': {
             badge: "MARKET SHARE & COMPETITIVE INTELLIGENCE",
@@ -581,9 +494,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 { value: "+$2.4M", label: "Revenue Opportunity Identified" },
                 { value: "12%", label: "Distribution Gap Closed" }
             ],
-            imageSrc: "iowa_liquor_chart.png",
             dashboardUrl: "https://app.powerbi.com/view?r=eyJrIjoiYmE0NGE1ZGEtOTlhYy00N2ZkLTliNzYtODIzNzZhMjkyOWYwIiwidCI6IjM0YmQ4YmVkLTJhYzEtNDFhZS05ZjA4LTRlMGEzZjExNzA2YyJ9",
-            dashboardBtnText: "Live Power BI Dashboard"
+            dashboardBtnText: "👉 CLICK HERE TO SEE FULL DASHBOARD",
+            githubUrl: "https://github.com/Raj2342/iowa-liquor-analysis"
         }
 
     };
@@ -733,25 +646,38 @@ document.addEventListener('DOMContentLoaded', () => {
             modalChartInstance = null;
         }
 
-        const visualCaption = modalEl.querySelector('.modal-visual-caption');
-        if (data.imageSrc) {
-            if (data.imageSrc === 'omnimart_chart.png') {
-                chartWrapper.innerHTML = `<img src="omnimart_chart.png" alt="OmniMart Market Basket Chart" style="width: 100%; height: auto; max-height: 380px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto 20px auto;">`;
-            } else if (data.imageSrc === 'iowa_liquor_chart.png') {
-                chartWrapper.innerHTML = `<img src="iowa_liquor_chart.png" alt="Iowa Liquor Market Share Chart" style="width: 100%; height: auto; max-height: 380px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto 20px auto;">`;
+        if (chartWrapper) {
+            if (data.imageSrc) {
+                chartWrapper.style.display = 'flex';
+                if (data.imageSrc === 'omnimart_chart.png') {
+                    chartWrapper.innerHTML = `<img src="omnimart_chart.png" alt="OmniMart Market Basket Chart" style="width: 100%; height: auto; max-height: 380px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto 20px auto;">`;
+                } else if (data.imageSrc === 'iowa_liquor_chart.png') {
+                    chartWrapper.innerHTML = `<img src="iowa_liquor_chart.png" alt="Iowa Liquor Market Share Chart" style="width: 100%; height: auto; max-height: 380px; object-fit: contain; border-radius: 8px; display: block; margin: 0 auto 20px auto;">`;
+                } else {
+                    chartWrapper.innerHTML = `<img src="${data.imageSrc}" alt="Dashboard Inside" class="contained-dashboard-img">`;
+                }
+            } else if (data.chartConfig) {
+                chartWrapper.style.display = 'flex';
+                chartWrapper.innerHTML = `<canvas></canvas>`;
+                const modalChartCtx = chartWrapper.querySelector('canvas').getContext('2d');
+                if (typeof Chart !== 'undefined') {
+                    modalChartInstance = new Chart(modalChartCtx, data.chartConfig);
+                }
             } else {
-                chartWrapper.innerHTML = `<img src="${data.imageSrc}" alt="Dashboard Inside" class="contained-dashboard-img">`;
-            }
-        } else {
-            chartWrapper.innerHTML = `<canvas></canvas>`;
-            const modalChartCtx = chartWrapper.querySelector('canvas').getContext('2d');
-            if (typeof Chart !== 'undefined') {
-                modalChartInstance = new Chart(modalChartCtx, data.chartConfig);
+                chartWrapper.style.display = 'none';
+                chartWrapper.innerHTML = '';
             }
         }
 
+        const visualCaption = modalEl.querySelector('.modal-visual-caption');
         if (data.dashboardUrl) {
-            visualCaption.innerHTML = `<a href="${data.dashboardUrl}" target="_blank" rel="noopener noreferrer" class="live-dashboard-btn"><span class="pulse-dot"></span> ${data.dashboardBtnText || 'Live Interactive Visualization'}</a>`;
+            let html = `<div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">`;
+            html += `<a href="${data.dashboardUrl}" target="_blank" rel="noopener noreferrer" class="live-dashboard-btn"><span class="pulse-dot"></span> ${data.dashboardBtnText || 'Live Interactive Visualization'}</a>`;
+            if (data.githubUrl) {
+                html += `<a href="${data.githubUrl}" target="_blank" rel="noopener noreferrer" class="live-dashboard-btn"><i class="fa-brands fa-github"></i> GitHub Repository</a>`;
+            }
+            html += `</div>`;
+            visualCaption.innerHTML = html;
         } else {
             visualCaption.innerHTML = `<i class="fa-solid fa-chart-line-up"></i> Live Interactive Visualization`;
         }
