@@ -1728,3 +1728,58 @@ a:hover {
         font-size: 0.85rem;
     }
 }
+
+/* Responsive Navbar Polish */
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+    }
+    .header {
+        height: auto !important;
+    }
+    .nav-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 15px 10px;
+        gap: 12px;
+        height: auto;
+    }
+    .mobile-nav-toggle {
+        display: none !important;
+    }
+    .nav-links {
+        display: flex !important;
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 5px;
+        flex-wrap: wrap;
+        font-size: 14px;
+    }
+    .nav-cta {
+        display: flex !important;
+        order: 2;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        margin: 0;
+    }
+    .nav-cta .btn {
+        padding: 8px 12px;
+        font-size: 14px;
+        width: auto;
+    }
+    .nav-cta div {
+        margin-left: 0 !important;
+    }
+    .nav-cta div a {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    .nav-cta div a i {
+        font-size: 16px !important;
+    }
+}
+
