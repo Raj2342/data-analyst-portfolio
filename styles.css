@@ -1783,3 +1783,68 @@ a:hover {
     }
 }
 
+/* Responsive Modal Polish */
+@media (max-width: 768px) {
+    .modal-container {
+        height: auto !important;
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+        width: 95% !important;
+    }
+    .modal-body {
+        height: auto !important;
+        padding: 15px !important;
+        overflow-y: visible !important;
+    }
+    .modal-header {
+        margin-bottom: 20px !important;
+        padding-bottom: 15px !important;
+        padding-right: 35px !important;
+    }
+    .modal-project-title {
+        font-size: 1.4rem !important;
+    }
+    .close-modal-btn {
+        top: 12px !important;
+        right: 12px !important;
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 1rem !important;
+    }
+    .modal-content-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 20px !important;
+    }
+    .modal-text-content, .modal-visual-panel {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin-bottom: 20px !important;
+    }
+    .modal-text-content p, .modal-visual-panel p, .modal-desc-context, .modal-desc-pipeline, .modal-desc-metrics {
+        word-wrap: break-word !important;
+        white-space: normal !important;
+    }
+    .modal-tabs {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        gap: 10px !important;
+        width: 100% !important;
+        padding-bottom: 12px !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    .modal-tabs::-webkit-scrollbar {
+        display: none !important;
+    }
+    .modal-tab-btn {
+        flex: 0 0 auto !important;
+        padding: 6px 12px !important;
+        font-size: 0.85rem !important;
+    }
+}
+
+
